@@ -6,6 +6,11 @@ Better this: http://jinahya.googlecode.com/svn/trunk/com.googlecode.jinahya/bit-
 http://jflac.sourceforge.net/apidocs/org/kc7bfi/jflac/io/package-summary.html
 
 
+# flux
+http://stackoverflow.com/questions/247161/how-do-i-turn-a-string-into-a-stream-in-java
+
+
+
 # visualize tree
 https://github.com/jabbalaci/graphviz-java-api
 toDot() methods..
