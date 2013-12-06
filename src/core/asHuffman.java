@@ -1,14 +1,15 @@
 package core;
 
 import com.beust.jcommander.JCommander;
+import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.util.List;
+import java.util.BitSet;
 
 public class asHuffman {
     
     
     public static void main(String[] args) throws IOException {
-        JCommanderTest jct = new JCommanderTest();
+        Options jct = new Options();
         JCommander jCommander = null;
         String[] argv = { "-arg", "1", "test" ,"test" };
         
@@ -21,13 +22,10 @@ public class asHuffman {
             exe.usage();
         }
         
-        /*
-        Compresseur c = new Compresseur("fichier_binaire.dat","fichier_binaire.dat");
-        c.creerFichierBinaire();
-        c.lireFichierBinaire();
-        * */
-        
-        
+
+        //Compresseur c = new Compresseur("fichier_binaire.dat","fichier_binaire.dat");
+        //BitSet bits2 = BitSet.valueOf(new long[] { Long.parseLong("10", 2) });
+        //System.out.println(Long.toString(bits2.toLongArray()[0], 2)); // prints 1000001
         
         switch(jct.getOpt()){
             case 1:
@@ -47,5 +45,7 @@ public class asHuffman {
     
     //TODO: faire aussi deux main sans options.
     // appeleront juste de manière statique le bon truc
+    private BufferedInputStream inS;
 
 }
+

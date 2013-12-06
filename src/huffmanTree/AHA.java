@@ -1,52 +1,53 @@
 package huffmanTree;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.BitSet;
+import java.util.HashMap;
 
 /**
  * Classe gestionnaire de l'arbre de Humman
- * 
+ *
  */
 public class AHA {
-
-	Arbre aha;
-	Hashtable<Character, Feuille> index;
-	ArrayList<Arbre> orderNoeudPoids; // RENAME
-
-	
-	
-	
-	// TODO signatures à revoir
-	private void Modification(char symbole) {
-		// TODO
-	}
-
-	private void Traitement(Arbre Q) {
-
-	}
-
-	// Méthodes pour lire et encoder char.
-	public bit encoder(char lettre) {
-
-		
-	}
-	
-	// decoder, va etre spécial... doit avoir le flux
-	public void decoder(InputStream in, OutputStream out);
-	
-	
-
-	public String toString() {
-		StringBuffer sb = new StringBuffer();
-
-		sb.append("Arbre:\n").append(aha);
-		sb.append("Index:\n").append(index);
-		sb.append("orderNoeudPoids").append("toAdapt");
-		
-		
-		return sb.toString();
-	}
+    
+    Arbre aha;
+    HashMap<Character, Feuille> index;
+    //ArrayList<Arbre> orderNoeudPoids; // RENAME
+    
+    
+    
+    //Test si le char est présent dans l'arbre
+    public boolean charIsPresent(char c) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+    //Retourn le code(arbre) du caractere
+    public BitSet getCodeChar(char charAt) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+    
+    //Ennoncé
+    public void modificationAHA(char c){
+        Feuille f = null;
+        aha = this.traitement(f);
+    }
+    //Ennoncé
+    private Arbre traitement(Feuille f) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+    
+    public BitSet getCodeSpecialChar(char c) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+    
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        
+        sb.append("Arbre:\n").append(aha);
+        sb.append("Index:\n").append(index);
+        sb.append("orderNoeudPoids").append("toAdapt");
+        
+        
+        return sb.toString();
+    }
 
 }
