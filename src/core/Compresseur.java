@@ -13,9 +13,8 @@ public class Compresseur {
     private String nomFichierI = "";
     private String nomFichierO = "";
     private BufferedOutputStream outS;
-    private BufferedInputStream inS;
+    private BufferedReader inS;
     private AHAC struct  = null;
-    private char specialChar = '#';
     
     public Compresseur(String nomI,String nomO){
         this.nomFichierI = nomI;
@@ -35,11 +34,10 @@ public class Compresseur {
         
         
         // ouverture du flux de lecture du fichier a compresser
-        BufferedReader reader = null;
-        reader = new BufferedReader( new FileReader(this.nomFichierI));
+        this.inS = new BufferedReader( new FileReader(this.nomFichierI));
         
         //On parcourt tous les characteres du text a comrpesser
-        String ligne = reader.readLine();
+        String ligne = this.inS.readLine();
         while (ligne!=null)
         {
             //POur chaue caractere on fait le traitement adéquoite
@@ -48,7 +46,7 @@ public class Compresseur {
                 struct.encode(c, ecriture);
                 
             }
-            ligne = reader.readLine();
+            ligne = this.inS.readLine();
         }
         
         this.outS.close(); // fermeture du flux

@@ -27,6 +27,8 @@ public class asHuffman {
         //BitSet bits2 = BitSet.valueOf(new long[] { Long.parseLong("10", 2) });
         //System.out.println(Long.toString(bits2.toLongArray()[0], 2)); // prints 1000001
         
+        System.out.println((char)Integer.parseInt("1111010", 2));
+        
         switch(jct.getOpt()){
             case 1:
                 break;
