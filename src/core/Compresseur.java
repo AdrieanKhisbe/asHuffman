@@ -43,7 +43,9 @@ public class Compresseur {
             //POur chaue caractere on fait le traitement adéquoite
             for(int i = 0; i<ligne.length() ;i++){
                 char c = ligne.charAt(i);
+                System.out.println("Je lie le char :"+ c);
                 struct.encode(c, ecriture);
+                
                 
             }
             ligne = this.inS.readLine();

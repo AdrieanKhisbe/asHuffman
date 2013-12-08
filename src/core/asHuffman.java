@@ -1,7 +1,6 @@
 package core;
 
 import com.beust.jcommander.JCommander;
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.BitSet;
 
@@ -22,12 +21,14 @@ public class asHuffman {
             exe.usage();
         }
         
-
-        //Compresseur c = new Compresseur("fichier_binaire.dat","fichier_binaire.dat");
-        //BitSet bits2 = BitSet.valueOf(new long[] { Long.parseLong("10", 2) });
-        //System.out.println(Long.toString(bits2.toLongArray()[0], 2)); // prints 1000001
         
-        System.out.println((char)Integer.parseInt("1111010", 2));
+        Compresseur c = new Compresseur("fichier_binaire.txt","fichier_binaire.dat");
+        c.compression();
+        //BitSet bits2 = BitSet.valueOf(new long[] { Long.parseLong("10101001", 2) });
+        //System.out.println(Long.toString(bits2.toLongArray()[0], 2)); // prints 1000001
+
+            
+            
         
         switch(jct.getOpt()){
             case 1:
@@ -45,9 +46,8 @@ public class asHuffman {
         
     }
     
-    //TODO: faire aussi deux main sans options.
-    // appeleront juste de manière statique le bon truc
-    private BufferedInputStream inS;
-
+    
+    
+    //TODO : On remontre jusqua la racine obligatoirement ?
 }
 

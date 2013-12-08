@@ -21,32 +21,29 @@ public class AHAC extends AHA{
     public void encode(char c,BitOutputStream ecriture) throws IOException{
         
         if(this.charIsPresent(c)){
-            BitSet buff = this.getCodeChar(c);
+            String buff = this.getCodeChar(c);
             this.ecrirBitSetFlux(buff, ecriture);
         }else{
-            BitSet buff = this.getCodeSpecialChar(c);
+            String buff = this.getCodeSpecialChar();
             this.ecrirBitSetFlux(buff, ecriture);
             this.ecrirCharFlux(c, ecriture);
             
         }
         this.modificationAHA(c);
-        
     }
     
-    public void ecrirBitSetFlux(BitSet b,BitOutputStream flux) throws IOException{
-        for(int i = 0 ; i< b.length();i++){
-            if(b.get(i)){
-                flux.writeBit(1);
-            }else{
-                flux.writeBit(0);
-            }
+    public void ecrirBitSetFlux(String s,BitOutputStream flux) throws IOException{
+        System.out.println("J'ecirs les bits : "+s);
+        for(int i = 0 ; i< s.length();i++){
+            flux.writeBit(Character.getNumericValue(s.charAt(i)));
         }
     }
     
     public void ecrirCharFlux(char c,BitOutputStream flux) throws IOException{
         String buff = Integer.toBinaryString((int)c);
+        System.out.println("J'ecris en assci le char : "+c);
         for(int i = 0 ; i< buff.length();i++){
-            flux.writeBit(buff.charAt(Character.getNumericValue(i)));
+            flux.writeBit(Character.getNumericValue(buff.charAt(i)));
         }
     }
 }

@@ -1,10 +1,16 @@
 package huffmanTree;
 
 public class NoeudInterne extends Arbre {
-	
-	Arbre filsDroit;
-	Arbre filsGauche;
-	
-	
+    public Arbre filsGauche = null;
+    public Arbre filsDroit = null;
+    
+    
+    public NoeudInterne(Arbre ag, Arbre ad,int poids,String code){
+        this.filsGauche = ag;
+        this.filsDroit = ad;
+        this.code = code;
+        this.poids = poids;
+    }
+    
 
 }

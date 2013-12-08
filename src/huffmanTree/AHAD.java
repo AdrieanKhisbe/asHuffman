@@ -45,7 +45,7 @@ public class AHAD extends AHA{
     private Object naviguerAHA(int bit) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
-
+    
     private boolean isSpecial(char c) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
