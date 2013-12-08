@@ -12,5 +12,7 @@ public class NoeudInterne extends Arbre {
         this.poids = poids;
     }
     
-
+	public String toString() {
+		return "Noued interne:  poids =" + poids + ", code=" + code;
+	}
 }

@@ -2,7 +2,6 @@ package core;
 
 import com.beust.jcommander.JCommander;
 import java.io.IOException;
-import java.util.BitSet;
 
 public class asHuffman {
     
@@ -29,7 +28,7 @@ public class asHuffman {
 
             
             
-        
+        // TODO: vite changer cette ....
         switch(jct.getOpt()){
             case 1:
                 break;

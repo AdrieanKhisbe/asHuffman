@@ -13,11 +13,16 @@ import java.io.IOException;
  */
 public class AHAD extends AHA{
     NoeudInterne currentN = null;
-    Feuille currentF = null;
-    int recupChar = 0;
-    String buffChar = "";
+    Feuille currentF = null; // PASSER à arbre!!!!
+    // fonction à revoir!!
     
+    int recupChar = 0;
+    String buffChar = ""; //WTF: utilise vrai buff non?
+    
+    // NO COMPPRENDO
     public void decode(int bit, BufferedOutputStream ecriture) throws IOException {
+    	//TODO: retourne le code, l'éciture doit se faire pas le code appelant
+    
         if(recupChar == 0){
             if(this.naviguerAHA(bit) == null){
                 //Rien on a déja naviguer dans l'arbre et mis a jour la position courante du curseur dans l'arbre
