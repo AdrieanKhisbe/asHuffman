@@ -52,6 +52,7 @@ public class AHA {
     public void modificationAHA(char c) {
         Arbre q = null;
         Arbre p = null;
+         Feuille s = null;
         // Si s n'est pas dans H
         if (!this.charIsPresent(c)) {
             System.out.println("Nouveau caractère : " + c);
@@ -60,17 +61,18 @@ public class AHA {
             Arbre buff = special;
             
             
-            Feuille s = new Feuille(c, ((Feuille) q).getCode() + "1", 1);
+            s = new Feuille(c, ((Feuille) q).getCode() + "1", 1);
             index.put(c, s);
             s.posList = list.size() - 1;
             
             
             
-            q = new NoeudInterne(buff, s, 1, buff.code);
+            q = new NoeudInterne(buff, s, 0, buff.code);
             
             
             buff.code += 0;
             s.pere = q;
+            
             buff.pere = q;
             
             list.addLast(q);
@@ -91,49 +93,46 @@ public class AHA {
             System.out.println("Caractere déja présent !");
             // Soit q le feuille correspondant a s dans H
             q = index.get(c);
-            q.poids++;
+            //q.poids++;
             // aurait du appeler procédure pour mettre à jour tous les poids!
         }
         this.majList();
         this.traitement(q);
     }
     
-    // Ennoncé
-    // On ne peux que remonter dans la liste donc il faut seulement la remettre
-    // a jour a la fin
+
     private void traitement(Arbre q) {
+        Arbre p = q;
         Arbre viole = null;
         boolean swap = false;
+        boolean viol = false;
+       // System.out.println(">>> Traitement 1 \n" + this.indextoString());
         
-        for (int i = q.posList - 1; i > 0; i--) {
-            if (q.poids > ((Arbre) list.get(i)).poids) {
-                
-                // On cherche le dernier qui ces fait violé
-                for (int j = i; j >= 0; j--) {
-                    if (q.poids > ((Arbre) list.get(i)).poids) {
+        while(p.pere != null){
+            p.poids++;
+        for (int i = p.posList -1; i > 0; i--) {
+            //System.out.println("p est " + p.code+" et de poids : "+p.poids);
+                    
+                    if (p.poids > ((Arbre) list.get(i)).poids) {
                         viole = ((Arbre) list.get(i));
-                        System.out.println("!> condition Violeeeee");
+                        //System.out.println("!> condition Violeeeee");
+                        viol = true;
                     }
-                }
-                // On a le dernier violé
-                q = swap(q, viole);
-                System.out.println("On swap" + q.code + "et" + viole.code);
-                swap = true;
-            }
-            // Si le pere de q n'est pas la racine
-            if (i <= 1) {
-                // On incremente son poids et on re vérifis qu'il ne viole
-                // personne
-                q.pere.poids++;
-            }
+                    
         }
-        // On met a jour la nouvelle liste si il y a eu un swap
-        if (swap) {
-            System.out.println("On maj la liste comme il y a eu un swap !");
+        if(viol){
+          //  System.out.println(">>> Traitement 2 \n" + this.indextoString());
+            p = swap(p, viole);
             this.majList();
+            viol = false;
         }
         
-        System.out.println(">>> Traitement \n" + this.indextoString());
+        p = p.pere;
+        }
+        p.poids++;
+        
+        //System.out.println(">>> Traitement 3 \n" + this.indextoString());
+        
     }
     
     public String getCodeSpecialChar() {
@@ -154,23 +153,49 @@ public class AHA {
     }
     
     public Arbre swap(Arbre n1, Arbre n2) {
-        Arbre buff1 = n1;
+        
+        System.out.println( n2.code);
+        System.out.println( n1.code);
+        String s1 = n1.code;
+        String s2 = n2.code;
+        Arbre buff1 = new Arbre();
+        buff1.code = n1.code;
+        buff1.pere = n1.pere;
         Arbre buff2 = n2;
+        buff2.code = n2.code;
+        buff2.pere = n2.pere;
         
-        buff1.code = n2.code;
-        buff1.pere = n2.pere;
-        buff2.code = n1.code;
-        buff2.pere = n1.pere;
+        Arbre buff3 = n1.pere;
+        Arbre buff4 = n2.pere;
         
-        n2 = buff1;
-        n1 = buff2;
+        
+        if(((NoeudInterne) n2.pere).filsDroit.code.contentEquals(n2.code)){
+            if(((NoeudInterne) buff1.pere).filsDroit.code.contentEquals(n1.code)){
+                ((NoeudInterne) n1.pere).filsDroit = n2;
+            }else{
+                ((NoeudInterne) n1.pere).filsGauche = n2;
+            }
+            
+            ((NoeudInterne) n2.pere).filsDroit =n1;
+            
+        }else{
+            ((NoeudInterne) n2.pere).filsGauche =n1;
+        }
+        
+        n2.code = s1;
+        n1.code = s2;
+        n2.pere = buff3;
+        n1.pere =buff4 ;
+        
+        System.out.println( n2.code);
+        System.out.println( n1.code);
         
         // On met a jour les codes
         this.mAJ(n2, "first");
         this.mAJ(n1, "first");
         
         // On retourne q
-        return n2;
+        return n1;
     }
     
     // Mes a jour les code a partir du noeud
