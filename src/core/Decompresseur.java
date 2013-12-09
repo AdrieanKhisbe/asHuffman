@@ -22,7 +22,7 @@ public class Decompresseur {
     }
     
     
-    public void compression() throws IOException{
+    public void decompression() throws IOException{
         // ouverture du flux d'écriture du ficher decompresser
         this.outS = new BufferedOutputStream(new FileOutputStream (this.nomFichierO));
         
@@ -36,6 +36,7 @@ public class Decompresseur {
         {
             
             struct.decode(bit, this.outS);
+            System.out.println(bit);
             bit = this.inS.readBit();
         }
         

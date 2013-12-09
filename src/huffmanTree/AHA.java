@@ -84,7 +84,6 @@ public class AHA {
                 aha = q;
             }else{
                 q.pere = p;
-                System.out.println(p.code);
                 ((NoeudInterne)p).filsGauche = q;
             }
         }
@@ -106,7 +105,7 @@ public class AHA {
         Arbre viole = null;
         boolean swap = false;
         boolean viol = false;
-       // System.out.println(">>> Traitement 1 \n" + this.indextoString());
+        //System.out.println(">>> Traitement 1 \n" + this.indextoString());
         
         while(p.pere != null){
             p.poids++;
@@ -121,17 +120,19 @@ public class AHA {
                     
         }
         if(viol){
-          //  System.out.println(">>> Traitement 2 \n" + this.indextoString());
-            p = swap(p, viole);
+            //System.out.println(">>> Traitement 2 \n" + this.indextoString());
+            swap(p, viole);
+            System.out.println("JE VIENS DE SWAP");
             this.majList();
             viol = false;
+            //System.out.println(">>> Traitement 1 \n" + this.indextoString());
         }
         
         p = p.pere;
         }
         p.poids++;
         
-        //System.out.println(">>> Traitement 3 \n" + this.indextoString());
+        //System.out.println(">>> Traitement 2 \n" + this.indextoString());
         
     }
     
@@ -153,9 +154,11 @@ public class AHA {
     }
     
     public Arbre swap(Arbre n1, Arbre n2) {
+        /*
+         * Echanger les n. pere et echanger les n.pere.Fils
+         */
         
-        System.out.println( n2.code);
-        System.out.println( n1.code);
+        System.out.println("swapp entre "+n1 +" et "+n2);
         String s1 = n1.code;
         String s2 = n2.code;
         Arbre buff1 = new Arbre();
@@ -168,7 +171,7 @@ public class AHA {
         Arbre buff3 = n1.pere;
         Arbre buff4 = n2.pere;
         
-        
+        //Je pense que le bug vien d'ici, j'ai vraiemnt fait nimp mdr
         if(((NoeudInterne) n2.pere).filsDroit.code.contentEquals(n2.code)){
             if(((NoeudInterne) buff1.pere).filsDroit.code.contentEquals(n1.code)){
                 ((NoeudInterne) n1.pere).filsDroit = n2;
@@ -179,6 +182,11 @@ public class AHA {
             ((NoeudInterne) n2.pere).filsDroit =n1;
             
         }else{
+            if(((NoeudInterne) buff1.pere).filsDroit.code.contentEquals(n1.code)){
+                ((NoeudInterne) n1.pere).filsDroit = n2;
+            }else{
+                ((NoeudInterne) n1.pere).filsGauche = n2;
+            }
             ((NoeudInterne) n2.pere).filsGauche =n1;
         }
         
@@ -187,8 +195,6 @@ public class AHA {
         n2.pere = buff3;
         n1.pere =buff4 ;
         
-        System.out.println( n2.code);
-        System.out.println( n1.code);
         
         // On met a jour les codes
         this.mAJ(n2, "first");
@@ -200,6 +206,7 @@ public class AHA {
     
     // Mes a jour les code a partir du noeud
     public void mAJ(Arbre n, String s) {
+        
         // Lors du premier apelle le code de l'arbre courant est déja mis a jour
         if (s.contentEquals("first")) {
             if (!n.feuille) {
@@ -217,9 +224,11 @@ public class AHA {
                 this.mAJ(((NoeudInterne) n).filsDroit, "1");
             }
         }
+       
     }
     
     private void majList() {
+        System.out.println(">>> Traitement 1 \n" + this.indextoString());
         list.clear();
         LinkedList<Arbre> buffList = new LinkedList<Arbre>();
         buffList.addLast(aha);
@@ -234,6 +243,7 @@ public class AHA {
                 buffList.addLast(((NoeudInterne) n).filsGauche);
             }
         }
+        System.out.println(">>> Traitement 2 \n" + this.indextoString());
     }
     
     @Override

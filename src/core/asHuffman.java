@@ -27,66 +27,9 @@ public class asHuffman {
         c.compression();
         //BitSet bits2 = BitSet.valueOf(new long[] { Long.parseLong("10101001", 2) });
         //System.out.println(Long.toString(bits2.toLongArray()[0], 2)); // prints 1000001
-        BitInputStream inS = new BitInputStream(new BufferedInputStream( new FileInputStream("fichier_binaire.dat")));
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
-        System.out.println(inS.readBit());
+        System.out.println("\n\n\nMOITIIIERRR\n\n\n");
+        Decompresseur d = new Decompresseur("fichier_binaire.dat","ficier_decomrpesser.txt");
+       d.decompression();
             
         // TODO: vite changer cette ....
         switch(jct.getOpt()){
@@ -107,6 +50,14 @@ public class asHuffman {
     
     
     
-    //TODO : On remontre jusqua la racine obligatoirement ?
+    //TODO : amélioration On remontre jusqua la racine obligatoirement ?
+   //SWAP 2 FEUILLE PAS DE MAJ code ?
+    
+    /*
+     * BUG:
+     * -bit suplémenetaire a la fin (octet obligatoir)
+     * - pb de flush decompression en ecriture
+     * - caractere accepté : a-z A-Z seulement
+     */
 }
 
