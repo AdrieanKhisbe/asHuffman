@@ -43,7 +43,7 @@ public class AHAC extends AHA{
     public void ecrireCharFlux(char c,BitOutputStream flux) throws IOException{
         String buff = Integer.toBinaryString((int)c);
         System.out.println("Ecriture du caractère ascii : '"+c+"'");
-        for(int i = 0 ; i< buff.length();i++){
+        for(int i = 0 ; i< buff.length();i++){ //HERE
             flux.writeBit(Character.getNumericValue(buff.charAt(i)));
         }
         // SEE writeChar aurait il pas suffit?

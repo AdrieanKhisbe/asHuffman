@@ -52,7 +52,11 @@ public class Compresseur {
             }
             ligne = this.inS.readLine();
         }
-        arbreEncodage.ecrireCharFlux('\0', ecriture);
+
+        // encode caractère de fin. HACK
+        arbreEncodage.encode('\0', ecriture);
+        
+        outS.flush();
         this.outS.close(); // fermeture du flux
         this.inS.close(); // fermeture du flux
     }

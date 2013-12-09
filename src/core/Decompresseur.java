@@ -2,6 +2,7 @@ package core;
 
 
 import huffmanTree.AHAD;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -38,7 +39,15 @@ public class Decompresseur {
             struct.decode(bit, this.outS);
             System.out.println(bit);
             bit = this.inS.readBit();
+            
+            try {
+            	Thread.sleep(100);
+    		} catch (InterruptedException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
         }
+        outS.flush();
         
         this.outS.close(); // fermeture du flux
         this.inS.close(); // fermeture du flux

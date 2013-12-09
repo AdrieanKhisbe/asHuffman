@@ -1,6 +1,7 @@
 package core;
 
 import com.beust.jcommander.JCommander;
+
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,13 +23,20 @@ public class asHuffman {
             exe.usage();
         }
         
-        
-        Compresseur c = new Compresseur("fichier_binaire.txt","fichier_binaire.dat");
-        c.compression();
+    //   c.compression();
         //BitSet bits2 = BitSet.valueOf(new long[] { Long.parseLong("10101001", 2) });
         //System.out.println(Long.toString(bits2.toLongArray()[0], 2)); // prints 1000001
-        System.out.println("\n\n\nMOITIIIERRR\n\n\n");
-        Decompresseur d = new Decompresseur("fichier_binaire.dat","ficier_decomrpesser.txt");
+        System.out.println("fin Compression");
+//        try {
+//        	Thread.sleep(4000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+        System.out.println("Début Decompression");
+        
+        
+        Decompresseur d = new Decompresseur("fichier_binaire.dat","ficier_decompresser.txt");
        d.decompression();
             
         // TODO: vite changer cette ....

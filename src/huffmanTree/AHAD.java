@@ -29,7 +29,7 @@ public class AHAD extends AHA{
                 char c = currentF.lettre;
                 if(this.isSpecial(currentF)){
                     //On recupere les 8 prochaint bit
-                    recupChar = 7;
+                    recupChar = 8; //HERE
                 }else{
                     System.out.println("J'écris 1: "+currentF.lettre);
                     ecriture.write(currentF.lettre);
@@ -54,14 +54,14 @@ public class AHAD extends AHA{
     
     private Object naviguerAHA(int bit) {
         if(bit == 0){
-            if(((NoeudInterne)currentN).filsGauche.feuille){
+            if(((NoeudInterne)currentN).filsGauche instanceof Feuille){
                 this.currentF = (Feuille) ((NoeudInterne)currentN).filsGauche;
                 return this.currentF;
             }else{
                 this.currentN = ((NoeudInterne)currentN).filsGauche;
             }
         }else{
-            if(((NoeudInterne)currentN).filsDroit.feuille){
+            if(((NoeudInterne)currentN).filsDroit instanceof Feuille){
                 this.currentF = (Feuille) ((NoeudInterne)currentN).filsDroit;
                 return this.currentF;
             }else{
