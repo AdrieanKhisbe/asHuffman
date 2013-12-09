@@ -23,7 +23,7 @@ public class asHuffman {
 		}
 		long tempsAvantComp = System.currentTimeMillis();
 
-		Compresseur c = new Compresseur("fichier_binaire.txt",
+		Compresseur c = new Compresseur("test10",
 				"fichier_binaire.dat");
 		c.compression();
 		long tempsApresComp = System.currentTimeMillis();
@@ -43,7 +43,7 @@ public class asHuffman {
 
 		long tempsAvantDecomp = System.currentTimeMillis();
 		Decompresseur d = new Decompresseur("fichier_binaire.dat",
-				"ficier_decompresser.txt");
+				"fichier_decompresser.txt");
 		d.decompression();
 
 		long tempsApresDecomp = System.currentTimeMillis();

@@ -30,6 +30,8 @@ public class Decompresseur {
 						new FileOutputStream(
 								this.nomFichierO), Charset.forName("UTF-8")
 								.newEncoder()));
+		// BUFFER TODO
+		
 //				new BufferedOutputStream(new FileOutputStream(
 //				this.nomFichierO), Charset.forName("UTF-8")
 //				.newEncoder());

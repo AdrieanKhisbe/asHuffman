@@ -31,7 +31,7 @@ public class Compresseur {
 	public void compression() throws IOException {
 		// ouverture du flux d'écriture du ficher compresser
 		this.outS = new BufferedOutputStream(new FileOutputStream(
-				this.outPutFilename));
+				this.outPutFilename), 8192 * 64); // HERE: buffer size
 		BitOutputStream ecriture = new BitOutputStream(this.outS);
 
 		// ouverture du flux de lecture du fichier a compresser
@@ -45,7 +45,7 @@ public class Compresseur {
 		while ( ( cha= this.inS.read()) != -1) {
 			// Pour chaue caractere on fait le traitement adéquoite
 			
-				System.out.println(">> Lecture caractère : '" + cha + "'");
+			//	System.out.println(">> Lecture caractère : '" + (char) cha + "'");
 				arbreEncodage.encode((char) cha, ecriture);
 				// TODO: écrit ici!!
 							
