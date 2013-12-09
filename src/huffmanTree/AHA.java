@@ -1,6 +1,5 @@
 package huffmanTree;
 
-import java.util.BitSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -11,19 +10,19 @@ import java.util.Map;
  */
 public class AHA {
 
-	Arbre aha;
+	Arbre racineAha;
 	boolean first = true;
 	Map<Character, Feuille> index = new HashMap<>();
-	Arbre special = new Feuille('#', "", 0); // PK initialise feuille avec
+	Arbre feuilleSpeciale = new Feuille('#', "", 0); // PK initialise feuille avec
 												// code!?
 	LinkedList<Arbre> list = new LinkedList<>();
 
 	// ArrayList<Arbre> orderNoeudPoids; // RENAME
 
 	public AHA() {
-		aha = special;
-		aha.pere = aha;
-		list.addLast(special);
+		racineAha = feuilleSpeciale;
+		racineAha.pere = null; //Check?
+		list.addLast(feuilleSpeciale);
 	}
 
 	// Test si le char est présent dans l'arbre
@@ -57,9 +56,9 @@ public class AHA {
 		// Si s n'est pas dans H
 		if (!this.charIsPresent(c)) {
 			System.out.println("Nouveau caractère : " + c);
-			q = special;
-			p = special.pere;
-			Arbre buff = special;
+			q = feuilleSpeciale;
+			p = feuilleSpeciale.pere;
+			Arbre buff = feuilleSpeciale;
 
 			s = new Feuille(c, ((Feuille) q).getCode() + "1", 1);
 			index.put(c, s);
@@ -77,7 +76,7 @@ public class AHA {
 
 			if (first) {
 				first = false;
-				aha = q;
+				racineAha = q;
 			} else {
 				q.pere = p;
 				((NoeudInterne) p).filsGauche = q;
@@ -140,7 +139,7 @@ public class AHA {
 
 	public String getCodeSpecialChar() {
 		System.out.println("Récupération caractère spécial");
-		return special.code;
+		return feuilleSpeciale.code;
 	}
 
 	public Arbre finBloc(Arbre q) {
@@ -226,11 +225,10 @@ public class AHA {
 	}
 
 	private void majList() {
-		System.out.println(">>> Traitement avant mise à jour \n"
-				+ this.indextoString());
+		//System.out.println(">>> Traitement avant mise à jour \n"+ this.indextoString());
 		list.clear();
 		LinkedList<Arbre> buffList = new LinkedList<Arbre>();
-		buffList.addLast(aha);
+		buffList.addLast(racineAha);
 
 		while (buffList.size() != 0) {
 			Arbre n = (Arbre) buffList.pop();
@@ -242,14 +240,14 @@ public class AHA {
 				buffList.addLast(((NoeudInterne) n).filsGauche);
 			}
 		}
-		System.out.println(">>> Traitement après \n" + this.indextoString());
+		//System.out.println(">>> Traitement après \n" + this.indextoString());
 	}
 
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 
-		sb.append("Arbre:\n").append(aha);
+		sb.append("Arbre:\n").append(racineAha);
 		sb.append("Index:\n").append(index);
 		sb.append("orderNoeudPoids").append("toAdapt");
 
