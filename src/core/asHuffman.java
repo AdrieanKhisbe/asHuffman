@@ -21,10 +21,13 @@ public class asHuffman {
 			JCommander exe = new JCommander(jct, ex);
 			exe.usage();
 		}
+		long tempsAvantComp = System.currentTimeMillis();
 
 		Compresseur c = new Compresseur("fichier_binaire.txt",
 				"fichier_binaire.dat");
 		c.compression();
+		long tempsApresComp = System.currentTimeMillis();
+
 		// BitSet bits2 = BitSet.valueOf(new long[] { Long.parseLong("10101001",
 		// 2) });
 		// System.out.println(Long.toString(bits2.toLongArray()[0], 2)); //
@@ -38,10 +41,21 @@ public class asHuffman {
 		// }
 		System.out.println("Début Decompression");
 
+		long tempsAvantDecomp = System.currentTimeMillis();
 		Decompresseur d = new Decompresseur("fichier_binaire.dat",
 				"ficier_decompresser.txt");
 		d.decompression();
 
+		long tempsApresDecomp = System.currentTimeMillis();
+
+		long tC = (tempsApresComp - tempsAvantComp) / 1000;
+		long tD = (tempsApresDecomp - tempsAvantDecomp) / 1000;
+		// TODO : gérér millisec
+		System.out.println("Temps Compression:" + tC + "s");
+		System.out.println("Temps Decompression:" + tD + "s");
+		
+		
+		
 		// TODO: vite changer cette ....
 		switch (jct.getOpt()) {
 		case 1:
@@ -57,7 +71,6 @@ public class asHuffman {
 		}
 
 	}
-
 	// TODO : amélioration On remontre jusqua la racine obligatoirement ?
 	// SWAP 2 FEUILLE PAS DE MAJ code ?
 

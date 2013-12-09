@@ -14,6 +14,8 @@ public class Feuille extends Arbre {
 	}
 
 	public String toString() {
+		// pas performant mais bon.....
+		if(lettre== '\n') return "Feuille '\\n', poids = " + poids + ", code = " + code;
 		return "Feuille '" + lettre + "', poids = " + poids + ", code = " + code;
 	}
 }

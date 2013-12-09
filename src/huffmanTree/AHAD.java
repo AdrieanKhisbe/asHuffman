@@ -78,9 +78,7 @@ public class AHAD extends AHA {
 	 */
 	private Feuille naviguerAHA(int bit) {
 		// Poisition courante jamais dans une feuille
-		System.out.println(currentP);
-
-
+		// System.out.println(currentP); //D
 		if (bit == 0) {
 
 			currentP = ((NoeudInterne) currentP).filsGauche;

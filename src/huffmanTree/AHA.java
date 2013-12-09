@@ -15,14 +15,14 @@ public class AHA {
 	Map<Character, Feuille> index = new HashMap<>();
 	Arbre feuilleSpeciale = new Feuille('#', "", 0); // PK initialise feuille avec
 												// code!?
-	LinkedList<Arbre> list = new LinkedList<>();
+	LinkedList<Arbre> ordreNoeuds = new LinkedList<>();
 
 	// ArrayList<Arbre> orderNoeudPoids; // RENAME
 
 	public AHA() {
 		racineAha = feuilleSpeciale;
 		racineAha.pere = null; //Check?
-		list.addLast(feuilleSpeciale);
+		ordreNoeuds.addLast(feuilleSpeciale);
 	}
 
 	// Test si le char est présent dans l'arbre
@@ -39,8 +39,8 @@ public class AHA {
 
 		StringBuffer sb = new StringBuffer();
 		sb.append(">> Index:\n");
-		for (int i = list.size() - 1; i >= 0; i--) {
-			sb.append("--> ").append(list.get(i)).append("\n");
+		for (int i = ordreNoeuds.size() - 1; i >= 0; i--) {
+			sb.append("--> ").append(ordreNoeuds.get(i)).append("\n");
 
 		}
 		sb.append("Fin index");
@@ -62,7 +62,7 @@ public class AHA {
 
 			s = new Feuille(c, ((Feuille) q).getCode() + "1", 1);
 			index.put(c, s);
-			s.posList = list.size() - 1;
+			s.posList = ordreNoeuds.size() - 1;
 
 			q = new NoeudInterne(buff, s, 0, buff.code);
 
@@ -71,8 +71,8 @@ public class AHA {
 
 			buff.pere = q;
 
-			list.addLast(q);
-			list.addLast(s);
+			ordreNoeuds.addLast(q);
+			ordreNoeuds.addLast(s);
 
 			if (first) {
 				first = false;
@@ -84,7 +84,9 @@ public class AHA {
 		}
 		// Sinon
 		else {
-			System.out.println("Caractere déja présent !");
+			// System.out.println("Caractere déja présent !");
+			// D
+			
 			// Soit q le feuille correspondant a s dans H
 			q = index.get(c);
 			// q.poids++;
@@ -107,7 +109,7 @@ public class AHA {
 				// System.out.println("p est " +
 				// p.code+" et de poids : "+p.poids);
 
-				Arbre tmp = ((Arbre) list.get(i));
+				Arbre tmp = ((Arbre) ordreNoeuds.get(i));
 				if (p.poids > tmp.poids ) {
 
 					viole = tmp;
@@ -117,23 +119,21 @@ public class AHA {
 
 			}
 			if (viol) {
-				// System.out.println(">>> Traitement 2 \n" +
-				// this.indextoString());
+				 
 				if(!p.pere.code.contentEquals(viole.code)){
 					swap(p, viole);
-					System.out.println("JE VIENS DE SWAP");
+					//System.out.println("JE VIENS DE SWAP");
 					this.majList();
 					viol = false;
 				}
-				// System.out.println(">>> Traitement 1 \n" +
-				// this.indextoString());
+			
 			}
 
 			p = p.pere;
 		}
 		p.poids++;
 
-		// System.out.println(">>> Traitement 2 \n" + this.indextoString());
+//		System.out.println(">>> Traitement Index après traitement \n" + this.indextoString());
 
 	}
 
@@ -145,10 +145,10 @@ public class AHA {
 	public Arbre finBloc(Arbre q) {
 		Arbre rep = q;
 		// On parcourt la liste de q a q +1
-		for (int i = list.size() - 1; i >= 0; i--) {
+		for (int i = ordreNoeuds.size() - 1; i >= 0; i--) {
 			// Si q < q+1 q := q+1
-			if (rep.poids == ((Arbre) list.get(i)).poids) {
-				rep = (Arbre) list.get(i);
+			if (rep.poids == ((Arbre) ordreNoeuds.get(i)).poids) {
+				rep = (Arbre) ordreNoeuds.get(i);
 			}
 		}
 		return rep;
@@ -226,15 +226,15 @@ public class AHA {
 
 	private void majList() {
 		//System.out.println(">>> Traitement avant mise à jour \n"+ this.indextoString());
-		list.clear();
+		ordreNoeuds.clear();
 		LinkedList<Arbre> buffList = new LinkedList<Arbre>();
 		buffList.addLast(racineAha);
 
 		while (buffList.size() != 0) {
 			Arbre n = (Arbre) buffList.pop();
 
-			list.addLast(n);
-			n.posList = list.size() - 1;
+			ordreNoeuds.addLast(n);
+			n.posList = ordreNoeuds.size() - 1;
 			if (!(n instanceof Feuille)) {
 				buffList.addLast(((NoeudInterne) n).filsDroit);
 				buffList.addLast(((NoeudInterne) n).filsGauche);

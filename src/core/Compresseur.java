@@ -40,19 +40,15 @@ public class Compresseur {
 				new FileInputStream(this.inputFilename), Charset.forName(
 						"UTF-8").newDecoder()));
 
-		// On parcourt tous les characteres du text a compresser
-		String ligne = this.inS.readLine();
-		while (ligne != null) {
+		// Lecture caractère par caractère
+		int cha;
+		while ( ( cha= this.inS.read()) != -1) {
 			// Pour chaue caractere on fait le traitement adéquoite
-			for (int i = 0; i < ligne.length(); i++) {
-				char c = ligne.charAt(i);
-				System.out.println(">> Lecture caractère : '" + c + "'");
-				arbreEncodage.encode(c, ecriture);
+			
+				System.out.println(">> Lecture caractère : '" + cha + "'");
+				arbreEncodage.encode((char) cha, ecriture);
 				// TODO: écrit ici!!
-				System.out.println("\n");
-
-			}
-			ligne = this.inS.readLine();
+							
 		}
 
 		// encode caractère de fin. HACK

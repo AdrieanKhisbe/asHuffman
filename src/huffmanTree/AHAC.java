@@ -34,7 +34,7 @@ public class AHAC extends AHA {
 
 	public void ecrireBitSetFlux(String s, BitOutputStream flux)
 			throws IOException {
-		System.out.println("Ecriture des bits : '" + s + "'");
+//		System.out.println("Ecriture des bits : '" + s + "'");
 		for (int i = 0; i < s.length(); i++) {
 			flux.writeBit(Character.getNumericValue(s.charAt(i)));
 		}
@@ -43,22 +43,23 @@ public class AHAC extends AHA {
 	public void ecrireCharFlux(char c, BitOutputStream flux) throws IOException {
 	
 		String buff = Integer.toBinaryString((int) c);
-		System.out.println("Ecriture du caractère ascii : '" + c + "'");
+	//	System.out.println("Ecriture du caractère ascii : '" + c + "'");
+		int tmp = 0;
+		if(buff.length()>8){
+			tmp = 8;
+		}else{
+			tmp = buff.length();
+		}
 		
-		for(int j = buff.length(); j< 8; j++){
+		for(int j = tmp ; j< 8; j++){ //HERE
 			flux.writeBit(0);
 		}
 		
-		
-		for (int i = 0; i < buff.length(); i++) { // HERE
+		//int j =  (buff.length()> 8) ? buff.length() :8;
+				
+				
+		for (int i = 0; i<tmp; i++) { 
 			flux.writeBit(Character.getNumericValue(buff.charAt(i)));
 		}
-		//Ecrire avant lecriture du char ascii
-//		while (i < 8) {
-//			flux.writeBit(0);
-//			i++;
-//		}
-		// BUG
-		// SEE writeChar aurait il pas suffit?
 	}
 }

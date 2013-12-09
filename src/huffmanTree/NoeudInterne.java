@@ -13,6 +13,6 @@ public class NoeudInterne extends Arbre {
     }
     
 	public String toString() {
-		return "Noued interne:  poids =" + poids + ", code=" + code;
+		return "Noued interne:  poids = " + poids + ", code = " + code;
 	}
 }
