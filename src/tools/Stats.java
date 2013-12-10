@@ -4,6 +4,8 @@
  */
 package tools;
 
+import java.io.File;
+
 /**
  * 
  * @author Steph
@@ -84,7 +86,7 @@ public class Stats {
 
 				// Swap
 				System.out.println("Nombre de Swap: " + Stats.nbSwap);
-				long percentSwap = (Stats.timeSwap / 10) / Stats.getChrono(); // *100
+				float percentSwap = (Stats.timeSwap / 10) / Stats.getChrono(); // *100
 																				// stat
 																				// /1000
 																				// s
@@ -96,7 +98,7 @@ public class Stats {
 				System.out.println("Nombre de Maj ordre de la liste : "
 						+ Stats.nbMajList);
 
-				long percentList = (Stats.timeList / 10) / Stats.getChrono();
+				float percentList = (Stats.timeList / 10) / Stats.getChrono();
 
 				Stats.printDebug("t list:" + timeList);
 				System.out.println("Temps passé à réordonner la liste: "
@@ -116,7 +118,7 @@ public class Stats {
 
 	public static void printCompressionWriteStats() {
 		if (Stats.getChrono() != 0) {
-			long percentWrite = (Stats.timeBinaryWrite / 10)
+			float percentWrite = (Stats.timeBinaryWrite / 10)
 					/ Stats.getChrono();
 
 			System.out.println("Temps passé à écrire en binaire: "
@@ -144,8 +146,8 @@ public class Stats {
 		tempsApres = System.currentTimeMillis();
 	}
 
-	public static long getChrono() {
-		return ((long) (tempsApres - tempsAvant)) / 1000l;
+	public static float getChrono() {
+		return ((float) (tempsApres - tempsAvant)) / 1000l;
 		// TODO fix
 	}
 
@@ -199,6 +201,25 @@ public class Stats {
 
 	public static void addTimeBinaryWrite(long time) {
 		timeBinaryWrite += time;
+	}
+
+	/**
+	 * ratio compression
+	 * 
+	 * @param fn1
+	 * @param fn2
+	 * @return taille fichier 1 rapporté au fichier 2
+	 */
+	public static float compareFileSize(String fn1, String fn2) {
+
+		File f1 = new java.io.File(fn1);
+		float l1 = f1.length();
+
+		File f2 = new java.io.File(fn2);
+		float l2 = f2.length();
+
+		return l2 / l1;
+
 	}
 
 }

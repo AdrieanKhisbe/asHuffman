@@ -92,6 +92,11 @@ public class asHuffman {
 		//Stats.printDebug("Fin Compression");
 		//Stats.printCompressionWriteStats();
 		//Stats.printStats();
+		 
+		 float tauxCompression  = Stats.compareFileSize(inputFile, compressedFile);
+		 System.out.println("Taux de compression: "+ (100 -(tauxCompression *  100)) +"%");
+		 
+	
 	}
 
 	private static void decompressMode(String compressedFile, String outPutFile)
