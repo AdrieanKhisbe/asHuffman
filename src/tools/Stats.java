@@ -13,8 +13,10 @@ public class Stats {
 	public static int nbTotalChar = 0;
 	public static int nbSwap = 0;
 	public static int nbMajList = 0; // -> O(n*n);
-	public static int timeSwap = 0;
-	public static int timeList = 0; // -> O(n*n);
+	public static long timeSwap = 0;
+	public static long timeList = 0; // -> O(n*n);
+	public static long timeBinaryWrite = 0;
+	
 	public static long tempsAvant = 0;
 	public static long tempsApres = 0;
 
@@ -74,6 +76,7 @@ public class Stats {
 					+ Stats.nbCharDiff);
 			System.out.println("Nombre de caractere Total : "
 					+ Stats.nbTotalChar);
+			
 			// TODO: stat compression!!
 
 			// Swap
@@ -98,14 +101,23 @@ public class Stats {
 				resetStats();
 		}
 	}
+	public static void printCompressionWriteStats(){
+		long percentWrite = (Stats.timeBinaryWrite / 10) / Stats.getChrono(); // *100 stat /1000 s
+
+		System.out.println("Temps passé à écrire en binaire: " + Stats.timeBinaryWrite
+				+ " ms, soit " + percentWrite + "% du temps total");
+
+	}
+	
 
 	public static void resetStats() {
 		nbCharDiff = 0;
 		nbTotalChar = 0;
 		nbSwap = 0;
-		nbMajList = 0; // -> O(n*n);
+		nbMajList = 0; // -> O(n*n); fffffuuuuu
 		timeSwap = 0;
 		timeList = 0;
+		timeBinaryWrite = 0;
 
 	}
 
@@ -164,4 +176,12 @@ public class Stats {
 	public static void addTimeList(long time) {
 		timeList += time;
 	}
+	public static void resetTimeBinaryWrite() {
+		timeBinaryWrite = 0;
+	}
+
+	public static void addTimeBinaryWrite(long time) {
+		timeBinaryWrite += time;
+	}
+	
 }

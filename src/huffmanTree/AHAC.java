@@ -20,6 +20,7 @@ public class AHAC extends AHA {
 	}
 
 	public void encode(char c, BitOutputStream ecriture) throws IOException {
+		// TODO. bonux  passer au dessus?
 
 		if (this.charIsPresent(c)) {
 			String buff = this.getCodeChar(c);
@@ -36,13 +37,17 @@ public class AHAC extends AHA {
 	public void ecrireBitSetFlux(String s, BitOutputStream flux)
 			throws IOException {
 		Stats.printCharIOC("Ecriture des bits : '" + s + "'");
+		long tstart = System.currentTimeMillis();
+		
 		for (int i = 0; i < s.length(); i++) {
 			flux.writeBit(Character.getNumericValue(s.charAt(i)));
 		}
+		Stats.addTimeBinaryWrite(System.currentTimeMillis() - tstart);
 	}
 
 	public void ecrireCharFlux(char c, BitOutputStream flux) throws IOException {
-	
+		long tstart = System.currentTimeMillis();
+		
 		String buff = Integer.toBinaryString((int) c);
 		Stats.printCharIOC("Ecriture du caractère ascii : '" + c + "'");
 		int tmp = 0;
@@ -62,5 +67,7 @@ public class AHAC extends AHA {
 		for (int i = 0; i<tmp; i++) { 
 			flux.writeBit(Character.getNumericValue(buff.charAt(i)));
 		}
+		Stats.addTimeBinaryWrite(System.currentTimeMillis() - tstart);
+		
 	}
 }

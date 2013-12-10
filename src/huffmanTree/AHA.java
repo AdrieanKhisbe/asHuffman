@@ -106,8 +106,6 @@ public class AHA {
 	private void traitement(Arbre q) {
 		Arbre p = q;
 		Arbre viole = null;
-		boolean swap = false; // TODO clean
-		boolean viol = false;
 		Stats.printDebug(">>> Index avant traitement \n" + this.indextoString());
 
 		while (p.pere != null) {
@@ -120,18 +118,17 @@ public class AHA {
 				if (p.poids > tmp.poids) {
 
 					viole = tmp;
-					// System.out.println("!> condition Violeeeee");
-					viol = true;
+					Stats.printDebug("!> condition Violeeeee");
 				}
 
 			}
-			if (viol) {
+			if (viole != null) {
 
 				if (!p.pere.code.contentEquals(viole.code)) {
 					swap(p, viole);
-					// System.out.println("JE VIENS DE SWAP");
+					Stats.printDebug("JE VIENS DE SWAP");
 
-					viol = false;
+					viole = null;
 				}
 
 			}
@@ -249,8 +246,10 @@ public class AHA {
 		ordreNoeuds.clear();
 		LinkedList<Arbre> buffList = new LinkedList<Arbre>();
 		buffList.addLast(racineAha);
+		// TODO: expliquer comment tu fais la.....
+		// parcours profonddeur?
 
-		while (buffList.size() != 0) {
+		while (! buffList.isEmpty()) {
 			Arbre n = (Arbre) buffList.pop();
 
 			ordreNoeuds.addLast(n);
