@@ -32,7 +32,8 @@ public class Compresseur {
 	public void compression() throws IOException {
 		// ouverture du flux d'écriture du ficher compresser
 		this.outS = new BufferedOutputStream(new FileOutputStream(
-				this.outPutFilename), 8192 * 64); // HERE: buffer size
+				this.outPutFilename) //, 8192 * 64 DIS
+				); // HERE: buffer size
 		BitOutputStream ecriture = new BitOutputStream(this.outS);
 
 		// ouverture du flux de lecture du fichier a compresser

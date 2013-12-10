@@ -40,7 +40,7 @@ public class AHAD extends AHA {
 				return null;
 			} else if (this.isSpecial(c)) {
 				recupChar = 8;
-                                        Stats.printCharIOD("Caractere spécial !");
+                                        //§DISStats.printCharIOD("Caractere spécial !");
 			} else {
 				// écrit lettre
 

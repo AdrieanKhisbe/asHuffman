@@ -36,20 +36,20 @@ public class AHAC extends AHA {
 
 	public void ecrireBitSetFlux(String s, BitOutputStream flux)
 			throws IOException {
-		Stats.printCharIOC("Ecriture des bits : '" + s + "'");
+		//§DISStats.printCharIOC("Ecriture des bits : '" + s + "'");
 		long tstart = System.currentTimeMillis();
 		
 		for (int i = 0; i < s.length(); i++) {
 			flux.writeBit(Character.getNumericValue(s.charAt(i)));
 		}
-		Stats.addTimeBinaryWrite(System.currentTimeMillis() - tstart);
+		//§DISStats.addTimeBinaryWrite(System.currentTimeMillis() - tstart);
 	}
 
 	public void ecrireCharFlux(char c, BitOutputStream flux) throws IOException {
 		long tstart = System.currentTimeMillis();
 		
 		String buff = Integer.toBinaryString((int) c);
-		Stats.printCharIOC("Ecriture du caractère ascii : '" + c + "'");
+		//§DISStats.printCharIOC("Ecriture du caractère ascii : '" + c + "'");
 		int tmp = 0;
 		if(buff.length()>8){
 			tmp = 8;
@@ -67,7 +67,7 @@ public class AHAC extends AHA {
 		for (int i = 0; i<tmp; i++) { 
 			flux.writeBit(Character.getNumericValue(buff.charAt(i)));
 		}
-		Stats.addTimeBinaryWrite(System.currentTimeMillis() - tstart);
+		//§DISStats.addTimeBinaryWrite(System.currentTimeMillis() - tstart);
 		
 	}
 }

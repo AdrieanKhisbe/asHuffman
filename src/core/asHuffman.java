@@ -42,15 +42,18 @@ public class asHuffman {
 
 			case "c":
 			case "compression":
+				System.out.println("Lancement AsHuffman en mode compression");
 				compressMode(args[1], args[2]);
 				break;
 				
 			case "d":
 			case "decompression":
+				System.out.println("Lancement AsHuffman en mode decompression");
 				decompressMode(args[1], args[2]);
 				break;
 
 			case "test": case "t":
+				System.out.println("Lancement AsHuffman en mode test");
 				testMode(args[1], args[2]);
 				break;
 
@@ -80,29 +83,29 @@ public class asHuffman {
 		System.out.println(">> Compression du fichier " + inputFile + " vers "
 				+ compressedFile);
 
-		Stats.lanceChrono();
+		//§DISStats.lanceChrono();
 		Compresseur c = new Compresseur(inputFile, compressedFile);
 		c.compression();
 
-		Stats.stopChrono();
-		Stats.printChrono("compression");
-		Stats.printDebug("Fin Compression");
-		Stats.printCompressionWriteStats();
-		Stats.printStats();
+		//§DISStats.stopChrono();
+		//§DISStats.printChrono("compression");
+		//§DISStats.printDebug("Fin Compression");
+		//§DISStats.printCompressionWrite//§DISStats();
+		//§DISStats.print//§DISStats();
 	}
 
 	private static void decompressMode(String compressedFile, String outPutFile)
 			throws IOException {
 		System.out.println(">> DeCompression du fichier " + compressedFile
-				+ " vers" + outPutFile);
+				+ " vers " + outPutFile);
 
-		Stats.printDebug("Début Decompression");
-		Stats.lanceChrono();
+		//§DISStats.printDebug("Début Decompression");
+		//§DISStats.lanceChrono();
 		Decompresseur d = new Decompresseur(compressedFile, outPutFile);
 		d.decompression();
-		Stats.stopChrono();
-		Stats.printChrono("decompression");
-		Stats.printStats();
+		//§DISStats.stopChrono();
+		//§DISStats.printChrono("decompression");
+		//§DISStats.print//§DISStats();
 	}
 
 	private static void testMode(String inputFile, String compressedFile,

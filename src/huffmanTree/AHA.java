@@ -52,16 +52,18 @@ public class AHA {
 	// TODO : REFAIRE L'ininatialisation des varibles !!!! et l'ajout des nous
 	// interne dans la list
 	public void modificationAHA(char c) {
-		Stats.nbTotalChar++;
+		//§DISStats.nbTotalChar++;
 
 		Arbre q = null;
 		Arbre p = null;
 		Feuille s = null;
-		// Si s n'est pas dans H
+		
+		// Nouveau caractère!
 		if (!this.charIsPresent(c)) {
-			Stats.nbCharDiff++;
+			//§DISStats.nbCharDiff++;
 
-			// System.out.println("Nouveau caractère : " + c);
+			//§DISStats.printDebug("Nouveau caractère : " + c);
+			
 			q = feuilleSpeciale;
 			p = feuilleSpeciale.pere;
 			Arbre buff = feuilleSpeciale;
@@ -79,6 +81,8 @@ public class AHA {
 
 			ordreNoeuds.addLast(q);
 			ordreNoeuds.addLast(s);
+			
+			// mise à jour spéciale
 
 			if (first) {
 				first = false;
@@ -91,8 +95,7 @@ public class AHA {
 		}
 		// Sinon
 		else {
-			// System.out.println("Caractere déja présent !");
-			// D
+			//§DISStats.printDebug("Caractere déja présent !");
 
 			// Soit q le feuille correspondant a s dans H
 			q = index.get(c);
@@ -106,7 +109,8 @@ public class AHA {
 	private void traitement(Arbre q) {
 		Arbre p = q;
 		Arbre viole = null;
-		Stats.printDebug(">>> Index avant traitement \n" + this.indextoString());
+		boolean swap = false;
+		//§DISStats.printDebug(">>> Index avant traitement \n" + this.indextoString());
 
 		while (p.pere != null) {
 			p.poids++;
@@ -115,19 +119,20 @@ public class AHA {
 				// p.code+" et de poids : "+p.poids);
 
 				Arbre tmp = ((Arbre) ordreNoeuds.get(i));
+				//Si la condition n'est plus respecté
 				if (p.poids > tmp.poids) {
 
 					viole = tmp;
-					Stats.printDebug("!> condition Violeeeee");
+					//§DISStats.printDebug("!> condition Violeeeee");
 				}
 
 			}
 			if (viole != null) {
-
+				//On ne doit pas swapper un noeud avec son pere
 				if (!p.pere.code.contentEquals(viole.code)) {
 					swap(p, viole);
-					Stats.printDebug("JE VIENS DE SWAP");
-
+					//§DISStats.printDebug("JE VIENS DE SWAP");
+					swap = true;
 					viole = null;
 				}
 
@@ -135,16 +140,19 @@ public class AHA {
 
 			p = p.pere;
 		}
-		this.majList();
+		// Ne met  à jour la liste que si swap réalisé
+		if(swap){
+			this.majList();
+		}
 		p.poids++;
 
-		Stats.printDebug(">>> Traitement Index après traitement \n" +
-		 this.indextoString());
+		//§DISStats.printDebug(">>> Traitement Index après traitement \n" +
+		//§DISStats this.indextoString());
 
 	}
 
 	public String getCodeSpecialChar() {
-		Stats.printDebug("Récupération caractère spécial");
+		//§DISStats.printDebug("Récupération caractère spécial");
 		return feuilleSpeciale.code;
 	}
 
@@ -161,12 +169,12 @@ public class AHA {
 	}
 
 	public Arbre swap(Arbre n1, Arbre n2) {
-		Stats.nbSwap++;
+		//§DISStats.nbSwap++;
 		long tstart = System.currentTimeMillis();
 
 
 
-		Stats.printDebug("Swap entre " + n1 + " et " + n2);
+		//§DISStats.printDebug("Swap entre " + n1 + " et " + n2);
 
 		/* Code plus lisible mais beugé....
 		 * NoeudInterne p1 = (NoeudInterne) n1.pere; NoeudInterne p2 =
@@ -232,17 +240,17 @@ public class AHA {
 		n2.miseAJourCode();
 		
 		// On retourne q
-		Stats.addTimeSwap(System.currentTimeMillis() - tstart);
+		//§DISStats.addTimeSwap(System.currentTimeMillis() - tstart);
 		return n1;
 	}
 
 	private void majList() {
 
 		long tstart = System.currentTimeMillis();
-		Stats.nbMajList++;
+		//§DISStats.nbMajList++;
 
-		Stats.printDebug(">>> Traitement avant mise à jour \n"
-				+ this.indextoString());
+		//§DISStats.printDebug(">>> Traitement avant mise à jour \n"
+		//§DISStats		+ this.indextoString());
 		ordreNoeuds.clear();
 		LinkedList<Arbre> buffList = new LinkedList<Arbre>();
 		buffList.addLast(racineAha);
@@ -260,9 +268,9 @@ public class AHA {
 			}
 		}
 		
-		Stats.printDebug(">>> Traitement après \n" + this.indextoString());
+		//§DISStats.printDebug(">>> Traitement après \n" + this.indextoString());
 
-		Stats.addTimeList(System.currentTimeMillis() - tstart);
+		//§DISStats.addTimeList(System.currentTimeMillis() - tstart);
 	}
 
 	@Override
