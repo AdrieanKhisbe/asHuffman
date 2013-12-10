@@ -47,7 +47,7 @@ public class Compresseur {
 		while ( ( cha= this.inS.read()) != -1) {
 			// Pour chaue caractere on fait le traitement adéquoite
 			
-				Stats.printCharIOC(">> Lecture caractère : '" + (char) cha + "'");
+				//§10Stats.printCharIOC(">> Lecture caractère : '" + (char) cha + "'")
 				arbreEncodage.encode((char) cha, ecriture);
 				// TODO: écrit ici!!
 							

@@ -45,15 +45,15 @@ public class Decompresseur {
         int bit = this.inS.readBit();
         while (bit != -1) {
             
-            Stats.printCharIOD("Lecteur du bit  : "+bit);
+        	//§10Stats.printCharIOD("Lecteur du bit  : "+bit);
             Character a = struct.decode(bit);
             
             if(a!=null){
                 outS.append(a);
-                Stats.printCharIOD("Ecriture du caractere  : "+a);
+              //§10Stats.printCharIOD("Ecriture du caractere  : "+a);
             }
             
-            // lecture nouvea
+            // lecture nouveaU
             bit = this.inS.readBit();
             
         }
