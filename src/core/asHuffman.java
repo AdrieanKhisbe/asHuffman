@@ -10,6 +10,8 @@ import tools.Stats;
 public class asHuffman {
 
 	public static void main(String[] args) throws IOException {
+
+		final String USAGE = "Usage: (de)compression inputfile outputfile";
 		// Stéphane, uuun throws ici....
 
 		/*
@@ -21,29 +23,45 @@ public class asHuffman {
 		 * String[] ex = { "-arg", "1", "test" }; JCommander exe = new
 		 * JCommander(jct, ex); exe.usage(); }
 		 */
+		
+		//TODO: desactiver après tests...
 		if (args.length == 0) {
 			System.out.println("Lancement en mode test");
 			testMode("fichier_original.txt", "fichier_compresse.dat",
 					"fichier_decompresse.txt");
 			System.out.println("Fin du test");
+			
+			// System.err.println(USAGE);
+			// System.exit(1);
+			
 		} else if (args.length == 3) {
 
-			switch (args[0]) {
+			// TODO: argument checking!!
 
+			switch (args[0].toLowerCase()) {
+
+			case "c":
 			case "compression":
-
+				compressMode(args[1], args[2]);
 				break;
-
-			case "decompression":
 				
-			case "test":
-
+			case "d":
+			case "decompression":
+				decompressMode(args[1], args[2]);
 				break;
+
+			case "test": case "t":
+				testMode(args[1], args[2]);
+				break;
+
 			default:
-				System.err.println("Usage: (de)compression inputfile outputfile");
+				System.err.println(USAGE);
 				System.exit(1);
 			}
 
+		} else {
+			System.err.println((args[0].equals(egmp))? eegg:USAGE);
+			System.exit(1);
 		}
 
 		/*
@@ -57,18 +75,10 @@ public class asHuffman {
 
 	// TODO : amélioration On remontre jusqua la racine obligatoirement ?
 	// SWAP 2 FEUILLE PAS DE MAJ code ?
-	private static void compressMode(String inputFile, String compressedFile)throws IOException{
-		
-	}
-	private static void decompressMode(String compressedFile,
-	String outPutFile) throws IOException{
-		
-	}
-
-	private static void testMode(String inputFile, String compressedFile,
-			String outPutFile) throws IOException {
-
-		// TODO: tester existance fichiers
+	private static void compressMode(String inputFile, String compressedFile)
+			throws IOException {
+		System.out.println(">> Compression du fichier " + inputFile + " vers "
+				+ compressedFile);
 
 		Stats.lanceChrono();
 		Compresseur c = new Compresseur(inputFile, compressedFile);
@@ -79,6 +89,12 @@ public class asHuffman {
 		Stats.printDebug("Fin Compression");
 		Stats.printCompressionWriteStats();
 		Stats.printStats();
+	}
+
+	private static void decompressMode(String compressedFile, String outPutFile)
+			throws IOException {
+		System.out.println(">> DeCompression du fichier " + compressedFile
+				+ " vers" + outPutFile);
 
 		Stats.printDebug("Début Decompression");
 		Stats.lanceChrono();
@@ -87,7 +103,21 @@ public class asHuffman {
 		Stats.stopChrono();
 		Stats.printChrono("decompression");
 		Stats.printStats();
-
 	}
 
+	private static void testMode(String inputFile, String compressedFile,
+			String outPutFile) throws IOException {
+		// TODO: tester existance fichiers
+		compressMode(inputFile, compressedFile);
+		decompressMode(compressedFile, outPutFile);
+	}
+
+	private static void testMode(String inputFile, String outPutFile)
+			throws IOException {
+		testMode(inputFile, "/tmp/compress", outPutFile);
+		// marchera que sur unix.
+	}
+	
+	private static String egmp= "troll", eegg="Attention, coeur application conçu par un Clown, bozo";
+	
 }

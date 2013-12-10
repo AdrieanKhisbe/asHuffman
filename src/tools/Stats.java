@@ -16,7 +16,7 @@ public class Stats {
 	public static long timeSwap = 0;
 	public static long timeList = 0; // -> O(n*n);
 	public static long timeBinaryWrite = 0;
-	
+
 	public static long tempsAvant = 0;
 	public static long tempsApres = 0;
 
@@ -76,39 +76,54 @@ public class Stats {
 					+ Stats.nbCharDiff);
 			System.out.println("Nombre de caractere Total : "
 					+ Stats.nbTotalChar);
-			
+
 			// TODO: stat compression!!
 
-			// Swap
-			System.out.println("Nombre de Swap: " + Stats.nbSwap);
-			long percentSwap = (Stats.timeSwap / 10) / Stats.getChrono(); // *100 stat /1000 s
+			if (getChrono() != 0) {
+				// pour éviter ArithmeticException... si temps null
 
-			System.out.println("Temps passé à swapper: " + Stats.timeSwap
-					+ " ms, soit " + percentSwap + "% du temps total");
+				// Swap
+				System.out.println("Nombre de Swap: " + Stats.nbSwap);
+				long percentSwap = (Stats.timeSwap / 10) / Stats.getChrono(); // *100
+																				// stat
+																				// /1000
+																				// s
 
-			// Liste
-			System.out.println("Nombre de Maj ordre de la liste : "
-					+ Stats.nbMajList);
+				System.out.println("Temps passé à swapper: " + Stats.timeSwap
+						+ " ms, soit " + percentSwap + "% du temps total");
 
-			long percentList = (Stats.timeList / 10) / Stats.getChrono();
+				// Liste
+				System.out.println("Nombre de Maj ordre de la liste : "
+						+ Stats.nbMajList);
 
-			Stats.printDebug("t list:" + timeList);
-			System.out.println("Temps passé à réordonner la liste: "
-					+ Stats.timeList + " ms, soit " + percentList
-					+ "% du temps total");
+				long percentList = (Stats.timeList / 10) / Stats.getChrono();
+
+				Stats.printDebug("t list:" + timeList);
+				System.out.println("Temps passé à réordonner la liste: "
+						+ Stats.timeList + " ms, soit " + percentList
+						+ "% du temps total");
+
+			} else {
+				System.out
+						.println("Trop rapide pour avoir de vraies stats.... :/");
+			}
+
 			System.out.println("\n");
 			if (reset)
 				resetStats();
 		}
 	}
-	public static void printCompressionWriteStats(){
-		long percentWrite = (Stats.timeBinaryWrite / 10) / Stats.getChrono(); // *100 stat /1000 s
 
-		System.out.println("Temps passé à écrire en binaire: " + Stats.timeBinaryWrite
-				+ " ms, soit " + percentWrite + "% du temps total");
+	public static void printCompressionWriteStats() {
+		if (Stats.getChrono() != 0) {
+			long percentWrite = (Stats.timeBinaryWrite / 10)
+					/ Stats.getChrono();
 
+			System.out.println("Temps passé à écrire en binaire: "
+					+ Stats.timeBinaryWrite + " ms, soit " + percentWrite
+					+ "% du temps total");
+		}
 	}
-	
 
 	public static void resetStats() {
 		nbCharDiff = 0;
@@ -131,6 +146,7 @@ public class Stats {
 
 	public static long getChrono() {
 		return ((long) (tempsApres - tempsAvant)) / 1000l;
+		// TODO fix
 	}
 
 	public static void printChrono(String s) {
@@ -176,6 +192,7 @@ public class Stats {
 	public static void addTimeList(long time) {
 		timeList += time;
 	}
+
 	public static void resetTimeBinaryWrite() {
 		timeBinaryWrite = 0;
 	}
@@ -183,5 +200,5 @@ public class Stats {
 	public static void addTimeBinaryWrite(long time) {
 		timeBinaryWrite += time;
 	}
-	
+
 }
