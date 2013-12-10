@@ -22,29 +22,27 @@ public class asHuffman {
 			JCommander exe = new JCommander(jct, ex);
 			exe.usage();
 		}
-          
-          
+
 		Stats.lanceChrono();
 
 		Compresseur c = new Compresseur("fichier_binaire.txt",
 				"fichier_binaire.dat");
 		c.compression();
 
-                    Stats.stopChrono();
-                    Stats.printChrono("compression"); 
-		Stats.printDebug("fin Compression");
-                    Stats.printStats();
-		Stats.printDebug("Début Decompression");
+		Stats.stopChrono();
+		Stats.printChrono("compression");
+		Stats.printDebug("Fin Compression");
+		Stats.printStats();
 
-          
-                    Stats.lanceChrono();
+		Stats.printDebug("Début Decompression");
+		Stats.lanceChrono();
 		Decompresseur d = new Decompresseur("fichier_binaire.dat",
 				"fichier_decompresser.txt");
 		d.decompression();
-                    Stats.stopChrono();
-                    Stats.printChrono("decompression"); 
-                    Stats.printStats();
-		
+		Stats.stopChrono();
+		Stats.printChrono("decompression");
+		Stats.printStats();
+
 		// TODO: vite changer cette ....Belle chose :)
 		switch (jct.getOpt()) {
 		case 1:
@@ -62,6 +60,5 @@ public class asHuffman {
 	}
 	// TODO : amélioration On remontre jusqua la racine obligatoirement ?
 	// SWAP 2 FEUILLE PAS DE MAJ code ?
-
 
 }
