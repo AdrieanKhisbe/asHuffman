@@ -46,6 +46,7 @@ public class Decompresseur {
         while (bit != -1) {
             
         	//§10Stats.printCharIOD("Lecteur du bit  : "+bit);
+        	//On decode les bits et on ecrit le caractere decodé
             Character a = struct.decode(bit);
             
             if(a!=null){

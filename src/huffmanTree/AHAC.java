@@ -18,19 +18,24 @@ public class AHAC extends AHA {
 	public AHAC() {
 
 	}
-
+	
 	public void encode(char c, BitOutputStream ecriture) throws IOException {
 		// TODO. bonux  passer au dessus?
-
+		
+		//Si le caractere est déja present
 		if (this.charIsPresent(c)) {
+			//On ecrit le prends le code du caractere et l'on l'ecrit
 			String buff = this.getCodeChar(c);
 			this.ecrireBitSetFlux(buff, ecriture);
 		} else {
+			//Sinon on prends le code du caractere special et on l'écrit
 			String buff = this.getCodeSpecialChar();
 			this.ecrireBitSetFlux(buff, ecriture);
+			//On ecrit le code ascii du nouveau caractere lu
 			this.ecrireCharFlux(c, ecriture);
 
 		}
+		//On modifit la strcuture 
 		this.modificationAHA(c);
 	}
 
@@ -51,6 +56,8 @@ public class AHAC extends AHA {
 		String buff = Integer.toBinaryString((int) c);
 		//§DISStats.printCharIOC("Ecriture du caractère ascii : '" + c + "'");
 		int tmp = 0;
+		//Si le code ascii est plus petit que 8 on rajoute des bit 0 jusqu'a 8
+		//Sinon on supprime les bits en trop :'( 
 		if(buff.length()>8){
 			tmp = 8;
 		}else{
