@@ -1,10 +1,8 @@
 package core;
 
-import com.beust.jcommander.JCommander;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
+
 import tools.Stats;
 
 public class asHuffman {
@@ -83,15 +81,22 @@ public class asHuffman {
 		System.out.println(">> Compression du fichier " + inputFile + " vers "
 				+ compressedFile);
 
-		//§DISStats.lanceChrono();
+		
+		
+		Stats.lanceChrono();
 		Compresseur c = new Compresseur(inputFile, compressedFile);
 		c.compression();
 
-		//§DISStats.stopChrono();
-		//§DISStats.printChrono("compression");
-		//§DISStats.printDebug("Fin Compression");
-		//§DISStats.printCompressionWrite//§DISStats();
-		//§DISStats.print//§DISStats();
+		Stats.stopChrono();
+		 Stats.printChrono("compression");
+		//Stats.printDebug("Fin Compression");
+		//Stats.printCompressionWriteStats();
+		//Stats.printStats();
+		 
+		 float tauxCompression  = Stats.compareFileSize(inputFile, compressedFile);
+		 System.out.println("Taux de compression: "+ (100 -(tauxCompression *  100)) +"%");
+		 
+	
 	}
 
 	private static void decompressMode(String compressedFile, String outPutFile)
@@ -100,12 +105,12 @@ public class asHuffman {
 				+ " vers " + outPutFile);
 
 		//§DISStats.printDebug("Début Decompression");
-		//§DISStats.lanceChrono();
+		Stats.lanceChrono();
 		Decompresseur d = new Decompresseur(compressedFile, outPutFile);
 		d.decompression();
-		//§DISStats.stopChrono();
-		//§DISStats.printChrono("decompression");
-		//§DISStats.print//§DISStats();
+		Stats.stopChrono();
+		Stats.printChrono("decompression");
+		//Stats.printStats();
 	}
 
 	private static void testMode(String inputFile, String compressedFile,

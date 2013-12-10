@@ -14,13 +14,13 @@ import tools.Stats;
  */
 public class AHAD extends AHA {
 	Arbre currentP;
-	int recupChar;
+	int nbBitNewChar;
 	String buffChar;
 
 	public AHAD() {
 		super();
 		currentP = racineAha;
-		recupChar = 8; // On le met a 7 par défaut car au début c'est forcément
+		nbBitNewChar = 8; // On le met a 7 par défaut car au début c'est forcément
 		buffChar = ""; // WTF: utilise vrai buff non?
 	}
 
@@ -28,40 +28,50 @@ public class AHAD extends AHA {
 	 * Est ce que l'on doit encore lire des caractère
 	 */
 
-	// NO COMPPRENDO
-	public Character decode(int bit)//, BufferedOutputStream ecriture)
+	//retourn le charactere decodé 
+	public Character decode(int bit)// , BufferedOutputStream ecriture)
 			throws IOException {
-		// TODO: retourne le code, l'éciture doit se faire pas le code appelant
 
-		if (recupChar == 0) {
+		/*
+		 * Si on n'a pas de nouveau caractere 
+		 */
+		if (nbBitNewChar == 0) {
+			//On navigue dans l'arbre
 			Feuille c = this.naviguerAHA(bit);
+			//Si on est pas encore tomber sur une feuille
 			if (c == null) {
 				// doit lire charactère de plus
 				return null;
+			//Si on est sur une feuille qui est le char special , les 8 prochain
+			//bits seront un nouveau caractere
 			} else if (this.isSpecial(c)) {
-				recupChar = 8;
-                                        //§DISStats.printCharIOD("Caractere spécial !");
+				nbBitNewChar = 8;
+				// §DISStats.printCharIOD("Caractere spécial !");
 			} else {
-				// écrit lettre
+				// Sinon on est tombé sur une feuille qui est une lettre donc 
+				//on l'ecrit et on l'ajoute a la strcuture
 
-			//	ecriture.write(c.lettre); // CHECK encodage...
+				// ecriture.write(c.lettre); // CHECK encodage...
 				// incrémente feuille
 				this.modificationAHA(c.lettre);
-				
+
 				return c.lettre;
 			}
 
 		} else {
-
-			recupChar--;
+			//On recupere les 8 prochain bit pour decoder le nouveau char 
+			nbBitNewChar--;
 			buffChar += bit;
-			if (recupChar == 0) {
+			//Si on a recupere les 8 prochains bit on decode notre char
+			if (nbBitNewChar == 0) {
 				char l = (char) Integer.parseInt(buffChar, 2);
-				//System.out.println("J'écris 2: " + l);
+				// System.out.println("J'écris 2: " + l);
 				// T ecriture.write(l);
+				//On l'ajoute a la structure
 				this.modificationAHA(l); // ajoute feuille
 				this.resetPosition(); // Hack. (ne sert que premiere fois)
 				buffChar = "";
+				//On le retourne pour lecriture
 				return l;
 			}
 		}
