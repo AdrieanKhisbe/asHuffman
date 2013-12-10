@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
-import tools.Stats;
 
 public class Decompresseur {
     private String nomFichierI = "";

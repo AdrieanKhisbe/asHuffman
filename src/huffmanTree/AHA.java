@@ -1,9 +1,8 @@
 	package huffmanTree;
 	
 	import java.util.HashMap;
-	import java.util.LinkedList;
-	import java.util.Map;
-	import tools.Stats;
+import java.util.LinkedList;
+import java.util.Map;
 	
 	/**
 	 * Classe gestionnaire de l'arbre de Humman
