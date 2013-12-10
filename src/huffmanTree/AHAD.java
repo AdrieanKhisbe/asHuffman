@@ -6,6 +6,7 @@ package huffmanTree;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
+import tools.Stats;
 
 /**
  * 
@@ -39,6 +40,7 @@ public class AHAD extends AHA {
 				return null;
 			} else if (this.isSpecial(c)) {
 				recupChar = 8;
+                                        Stats.printCharIOD("Caractere spécial !");
 			} else {
 				// écrit lettre
 
@@ -55,7 +57,7 @@ public class AHAD extends AHA {
 			buffChar += bit;
 			if (recupChar == 0) {
 				char l = (char) Integer.parseInt(buffChar, 2);
-				System.out.println("J'écris 2: " + l);
+				//System.out.println("J'écris 2: " + l);
 				// T ecriture.write(l);
 				this.modificationAHA(l); // ajoute feuille
 				this.resetPosition(); // Hack. (ne sert que premiere fois)

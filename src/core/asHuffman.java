@@ -5,6 +5,7 @@ import com.beust.jcommander.JCommander;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import tools.Stats;
 
 public class asHuffman {
 
@@ -21,42 +22,30 @@ public class asHuffman {
 			JCommander exe = new JCommander(jct, ex);
 			exe.usage();
 		}
-		long tempsAvantComp = System.currentTimeMillis();
+          
+          
+		Stats.lanceChrono();
 
-		Compresseur c = new Compresseur("test10",
+		Compresseur c = new Compresseur("fichier_binaire.txt",
 				"fichier_binaire.dat");
 		c.compression();
-		long tempsApresComp = System.currentTimeMillis();
 
-		// BitSet bits2 = BitSet.valueOf(new long[] { Long.parseLong("10101001",
-		// 2) });
-		// System.out.println(Long.toString(bits2.toLongArray()[0], 2)); //
-		// prints 1000001
-		System.out.println("fin Compression");
-		// try {
-		// Thread.sleep(4000);
-		// } catch (InterruptedException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		System.out.println("Début Decompression");
+                    Stats.stopChrono();
+                    Stats.printChrono("compression"); 
+		Stats.printDebug("fin Compression");
+                    Stats.printStats();
+		Stats.printDebug("Début Decompression");
 
-		long tempsAvantDecomp = System.currentTimeMillis();
+          
+                    Stats.lanceChrono();
 		Decompresseur d = new Decompresseur("fichier_binaire.dat",
 				"fichier_decompresser.txt");
 		d.decompression();
-
-		long tempsApresDecomp = System.currentTimeMillis();
-
-		long tC = (tempsApresComp - tempsAvantComp) / 1000;
-		long tD = (tempsApresDecomp - tempsAvantDecomp) / 1000;
-		// TODO : gérér millisec
-		System.out.println("Temps Compression:" + tC + "s");
-		System.out.println("Temps Decompression:" + tD + "s");
+                    Stats.stopChrono();
+                    Stats.printChrono("decompression"); 
+                    Stats.printStats();
 		
-		
-		
-		// TODO: vite changer cette ....
+		// TODO: vite changer cette ....Belle chose :)
 		switch (jct.getOpt()) {
 		case 1:
 			break;
@@ -74,8 +63,5 @@ public class asHuffman {
 	// TODO : amélioration On remontre jusqua la racine obligatoirement ?
 	// SWAP 2 FEUILLE PAS DE MAJ code ?
 
-	/*
-	 * BUG: -bit suplémenetaire a la fin (octet obligatoir) - pb de flush
-	 * decompression en ecriture - caractere accepté : a-z A-Z seulement
-	 */
+
 }

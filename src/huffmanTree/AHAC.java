@@ -7,6 +7,7 @@ package huffmanTree;
 import core.BitOutputStream;
 import java.io.IOException;
 import java.util.BitSet;
+import tools.Stats;
 
 /**
  * 
@@ -34,7 +35,7 @@ public class AHAC extends AHA {
 
 	public void ecrireBitSetFlux(String s, BitOutputStream flux)
 			throws IOException {
-//		System.out.println("Ecriture des bits : '" + s + "'");
+		Stats.printCharIOC("Ecriture des bits : '" + s + "'");
 		for (int i = 0; i < s.length(); i++) {
 			flux.writeBit(Character.getNumericValue(s.charAt(i)));
 		}
@@ -43,7 +44,7 @@ public class AHAC extends AHA {
 	public void ecrireCharFlux(char c, BitOutputStream flux) throws IOException {
 	
 		String buff = Integer.toBinaryString((int) c);
-	//	System.out.println("Ecriture du caractère ascii : '" + c + "'");
+		Stats.printCharIOC("Ecriture du caractère ascii : '" + c + "'");
 		int tmp = 0;
 		if(buff.length()>8){
 			tmp = 8;

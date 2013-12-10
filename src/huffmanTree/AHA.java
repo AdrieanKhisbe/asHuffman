@@ -3,6 +3,7 @@ package huffmanTree;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import tools.Stats;
 
 /**
  * Classe gestionnaire de l'arbre de Humman
@@ -50,12 +51,17 @@ public class AHA {
 	// TODO : REFAIRE L'ininatialisation des varibles !!!! et l'ajout des nous
 	// interne dans la list
 	public void modificationAHA(char c) {
+                    Stats.nbTotalChar++;
+                    
+                    
 		Arbre q = null;
 		Arbre p = null;
 		Feuille s = null;
 		// Si s n'est pas dans H
 		if (!this.charIsPresent(c)) {
-			System.out.println("Nouveau caractère : " + c);
+                    Stats.nbCharDiff++;
+              
+			//System.out.println("Nouveau caractère : " + c);
 			q = feuilleSpeciale;
 			p = feuilleSpeciale.pere;
 			Arbre buff = feuilleSpeciale;
@@ -81,6 +87,7 @@ public class AHA {
 				q.pere = p;
 				((NoeudInterne) p).filsGauche = q;
 			}
+                    //this.majList();
 		}
 		// Sinon
 		else {
@@ -92,7 +99,7 @@ public class AHA {
 			// q.poids++;
 			// aurait du appeler procédure pour mettre à jour tous les poids!
 		}
-		this.majList();
+		
 		this.traitement(q);
 	}
 
@@ -123,7 +130,7 @@ public class AHA {
 				if(!p.pere.code.contentEquals(viole.code)){
 					swap(p, viole);
 					//System.out.println("JE VIENS DE SWAP");
-					this.majList();
+					
 					viol = false;
 				}
 			
@@ -131,6 +138,7 @@ public class AHA {
 
 			p = p.pere;
 		}
+                    this.majList();
 		p.poids++;
 
 //		System.out.println(">>> Traitement Index après traitement \n" + this.indextoString());
@@ -138,7 +146,7 @@ public class AHA {
 	}
 
 	public String getCodeSpecialChar() {
-		System.out.println("Récupération caractère spécial");
+		//System.out.println("Récupération caractère spécial");
 		return feuilleSpeciale.code;
 	}
 
@@ -155,11 +163,12 @@ public class AHA {
 	}
 
 	public Arbre swap(Arbre n1, Arbre n2) {
+            Stats.nbSwap++;
 		/*
 		 * Echanger les n. pere et echanger les n.pere.Fils
 		 */
 
-		System.out.println("swapp entre " + n1 + " et " + n2);
+		//System.out.println("swapp entre " + n1 + " et " + n2);
 
 		/*
 		 * NoeudInterne p1 = (NoeudInterne) n1.pere; NoeudInterne p2 =
@@ -225,6 +234,7 @@ public class AHA {
 	}
 
 	private void majList() {
+                    Stats.nbMajList++;
 		//System.out.println(">>> Traitement avant mise à jour \n"+ this.indextoString());
 		ordreNoeuds.clear();
 		LinkedList<Arbre> buffList = new LinkedList<Arbre>();

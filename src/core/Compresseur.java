@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import tools.Stats;
 
 public class Compresseur {
 	private String inputFilename;
@@ -45,7 +46,7 @@ public class Compresseur {
 		while ( ( cha= this.inS.read()) != -1) {
 			// Pour chaue caractere on fait le traitement adéquoite
 			
-			//	System.out.println(">> Lecture caractère : '" + (char) cha + "'");
+				Stats.printCharIOC(">> Lecture caractère : '" + (char) cha + "'");
 				arbreEncodage.encode((char) cha, ecriture);
 				// TODO: écrit ici!!
 							
