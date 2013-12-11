@@ -310,6 +310,36 @@ import java.util.Map;
 	
 			return sb.toString();
 		}
+		
+		//TODO
+		/**
+		 * génère un arbre de l'arbre d'encodage 
+		 * @return code Dot pour décrire le graphe
+		 */
+		public String toDot(){
+			
+			StringBuffer sb = new StringBuffer();
+			
+			//TODO!!
+			
+			/*
+			Refaire parcours en proffondeur.
+			While ici? appele string todot des feuilles et nouds
+			 
+			 Notes pour dot: voir notes.org dans rapport
+			 		 
+			 Numéroter les noueds interne. (rajouter id noueds)
+			 Utiliser label pour indiquer le poids
+			 Rajouter le code pour les feuilles, lettre,	 
+			 
+			 Juste faire format texte.!
+			 (forme rectangle)
+			 
+			 */
+			
+			
+			return sb.toString();
+		}
 	
 	}
 	
