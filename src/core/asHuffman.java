@@ -2,6 +2,7 @@ package core;
 
 import java.io.IOException;
 
+import tools.Files;
 import tools.Stats;
 
 public class asHuffman {
@@ -11,47 +12,56 @@ public class asHuffman {
 		final String USAGE = "Usage: (de)compression inputfile outputfile";
 		// Stéphane, uuun throws ici....
 
-		// TODO: desactiver après tests...
-		if (args.length == 0) {
-			System.out.println("Lancement en mode test");
-			testMode("fichier_original.txt", "fichier_compresse.dat",
-					"fichier_decompresse.txt");
-			System.out.println("Fin du test");
+		try {
+			// TODO: desactiver après tests...
+			if (args.length == 0) {
+				System.out.println("Lancement en mode test");
+				testMode("fichier_original.txt", "fichier_compresse.dat",
+						"fichier_decompresse.txt");
+				System.out.println("Fin du test");
 
-			// System.err.println(USAGE);
-			// System.exit(1);
+				// System.err.println(USAGE);
+				// System.exit(1);
 
-		} else if (args.length == 3) {
+			} else if (args.length == 3) {
 
-			// TODO: argument checking!!
+				// TODO: argument checking!!
 
-			switch (args[0].toLowerCase()) {
+				switch (args[0].toLowerCase()) {
 
-			case "c":
-			case "compression":
-				System.out.println("Lancement AsHuffman en mode compression");
-				compressMode(args[1], args[2]);
-				break;
+				case "c":
+				case "compression":
+					System.out
+							.println("Lancement AsHuffman en mode compression");
+					compressMode(args[1], args[2]);
+					break;
 
-			case "d":
-			case "decompression":
-				System.out.println("Lancement AsHuffman en mode decompression");
-				decompressMode(args[1], args[2]);
-				break;
+				case "d":
+				case "decompression":
+					System.out
+							.println("Lancement AsHuffman en mode decompression");
+					decompressMode(args[1], args[2]);
+					break;
 
-			case "test":
-			case "t":
-				System.out.println("Lancement AsHuffman en mode test");
-				testMode(args[1], args[2]);
-				break;
+				case "test":
+				case "t":
+					System.out.println("Lancement AsHuffman en mode test");
+					testMode(args[1], args[2]);
+					break;
 
-			default:
-				System.err.println(USAGE);
+				default:
+					System.err.println(USAGE);
+					System.exit(1);
+				}
+
+			} else {
+				System.err.println((args[0].equals(egmp)) ? eegg : USAGE);
 				System.exit(1);
 			}
-
-		} else {
-			System.err.println((args[0].equals(egmp)) ? eegg : USAGE);
+		} catch (IOException e) {
+			System.err
+					.println("Le fichier d'input spécifié n'existe pas\n"
+							+" Arret du programme");
 			System.exit(1);
 		}
 
@@ -61,6 +71,9 @@ public class asHuffman {
 	// SWAP 2 FEUILLE PAS DE MAJ code ?
 	private static void compressMode(String inputFile, String compressedFile)
 			throws IOException {
+
+		Files.checkFileExists(inputFile);
+
 		System.out.println(">> Compression du fichier " + inputFile + " vers "
 				+ compressedFile);
 
@@ -74,13 +87,13 @@ public class asHuffman {
 		// §DISStats.printCompressionWriteStats();
 		// §DISStats.printStats();
 
-		float tauxCompression = Stats
+		float tauxCompression = Files
 				.compareFileSize(inputFile, compressedFile);
 		System.out.println("Taux de compression: "
 				+ (100 - (tauxCompression * 100)) + "%");
 
 		// Dot Regenation
-		//HERE: option!!
+		// HERE: option!!
 		System.out.println("Arbre Encodage Dot: ");
 		System.out.println(c.getArbreDot());
 
@@ -88,6 +101,8 @@ public class asHuffman {
 
 	private static void decompressMode(String compressedFile, String outPutFile)
 			throws IOException {
+
+		Files.checkFileExists(compressedFile);
 		System.out.println(">> DeCompression du fichier " + compressedFile
 				+ " vers " + outPutFile);
 
@@ -98,7 +113,7 @@ public class asHuffman {
 
 		Stats.stopChrono();
 		Stats.printChrono("decompression");
-		// Stats.printStats();
+		// §DISStats.printStats();
 
 		// Dot Regenation
 		System.out.println("Arbre Decodage Dot: ");
@@ -109,6 +124,8 @@ public class asHuffman {
 	private static void testMode(String inputFile, String compressedFile,
 			String outPutFile) throws IOException {
 		// TODO: tester existance fichiers
+
+		Files.checkFileExists(inputFile);
 		compressMode(inputFile, compressedFile);
 		decompressMode(compressedFile, outPutFile);
 	}

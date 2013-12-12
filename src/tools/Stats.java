@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tools;
 
-import java.io.File;
 
 /**
  * 
@@ -203,23 +198,6 @@ public class Stats {
 		timeBinaryWrite += time;
 	}
 
-	/**
-	 * ratio compression
-	 * 
-	 * @param fn1
-	 * @param fn2
-	 * @return taille fichier 1 rapporté au fichier 2
-	 */
-	public static float compareFileSize(String fn1, String fn2) {
 
-		File f1 = new java.io.File(fn1);
-		float l1 = f1.length();
-
-		File f2 = new java.io.File(fn2);
-		float l2 = f2.length();
-
-		return l2 / l1;
-
-	}
 
 }

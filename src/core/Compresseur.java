@@ -29,27 +29,27 @@ public class Compresseur {
 	}
 
 	public void compression() throws IOException {
-		// ouverture du flux d'écriture du ficher compresser
-		this.outS = new BufferedOutputStream(new FileOutputStream(
-				this.outPutFilename) //, 8192 * 64 DIS
-				); // HERE: buffer size
-		BitOutputStream ecriture = new BitOutputStream(this.outS);
-
 		// ouverture du flux de lecture du fichier a compresser
-
 		this.inS = new BufferedReader(new InputStreamReader(
 				new FileInputStream(this.inputFilename), Charset.forName(
 						"UTF-8").newDecoder()));
 
+		// ouverture du flux d'écriture du ficher compresser
+		this.outS = new BufferedOutputStream(new FileOutputStream(
+				this.outPutFilename) // , 8192 * 64 DIS
+		); // HERE: buffer size
+		BitOutputStream ecriture = new BitOutputStream(this.outS);
+
 		// Lecture caractère par caractère
 		int cha;
-		while ( ( cha= this.inS.read()) != -1) {
-			// Pour chaue caractere on fait le traitement adéquoite
-			
-				//§10Stats.printCharIOC(">> Lecture caractère : '" + (char) cha + "'")
-				arbreEncodage.encode((char) cha, ecriture);
-				// TODO: écrit ici!!
-							
+		while ((cha = this.inS.read()) != -1) {
+			// Pour chaque caractere on fait le traitement adéquoite
+
+			//§DISStats.printCharIOC(">> Lecture caractère : '" + (char) cha +
+			// "'")
+			arbreEncodage.encode((char) cha, ecriture);
+			// TODO: écrit ici!!
+
 		}
 
 		// encode caractère de fin. HACK
@@ -59,9 +59,9 @@ public class Compresseur {
 		this.outS.close(); // fermeture du flux
 		this.inS.close(); // fermeture du flux
 	}
-	
-	public String getArbreDot(){
+
+	public String getArbreDot() {
 		return arbreEncodage.toDot();
 	}
-	
+
 }
