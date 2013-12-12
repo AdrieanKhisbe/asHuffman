@@ -79,6 +79,11 @@ public class asHuffman {
 		System.out.println("Taux de compression: "
 				+ (100 - (tauxCompression * 100)) + "%");
 
+		// Dot Regenation
+		//HERE: option!!
+		System.out.println("Arbre Encodage Dot: ");
+		System.out.println(c.getArbreDot());
+
 	}
 
 	private static void decompressMode(String compressedFile, String outPutFile)
@@ -90,9 +95,15 @@ public class asHuffman {
 		Stats.lanceChrono();
 		Decompresseur d = new Decompresseur(compressedFile, outPutFile);
 		d.decompression();
+
 		Stats.stopChrono();
 		Stats.printChrono("decompression");
 		// Stats.printStats();
+
+		// Dot Regenation
+		System.out.println("Arbre Decodage Dot: ");
+		System.out.println(d.getArbreDot());
+
 	}
 
 	private static void testMode(String inputFile, String compressedFile,

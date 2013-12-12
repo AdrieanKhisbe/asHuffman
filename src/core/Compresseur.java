@@ -59,5 +59,9 @@ public class Compresseur {
 		this.outS.close(); // fermeture du flux
 		this.inS.close(); // fermeture du flux
 	}
-
+	
+	public String getArbreDot(){
+		return arbreEncodage.toDot();
+	}
+	
 }

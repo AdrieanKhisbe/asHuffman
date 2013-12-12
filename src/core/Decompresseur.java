@@ -15,12 +15,12 @@ public class Decompresseur {
     private String nomFichierO = "";
     private PrintWriter outS; //BufferedOutputStream outS;
     private BitInputStream inS;
-    private AHAD struct = null;
+    private AHAD arbreDecodage = null;
     
     public Decompresseur(String nomI, String nomO) {
         this.nomFichierI = nomI;
         this.nomFichierO = nomO;
-        this.struct = new AHAD();
+        this.arbreDecodage = new AHAD();
     }
     
     public void decompression() throws IOException {
@@ -30,11 +30,6 @@ public class Decompresseur {
                 new FileOutputStream(
                 this.nomFichierO), Charset.forName("UTF-8")
                 .newEncoder()));
-        // BUFFER TODO
-        
-        //				new BufferedOutputStream(new FileOutputStream(
-        //				this.nomFichierO), Charset.forName("UTF-8")
-        //				.newEncoder());
         
         // ouverture du flux de lecture du fichier a decompresser
         this.inS = new BitInputStream(new BufferedInputStream(
@@ -45,15 +40,16 @@ public class Decompresseur {
         while (bit != -1) {
             
         	//§10Stats.printCharIOD("Lecteur du bit  : "+bit);
+        	
         	//On decode les bits et on ecrit le caractere decodé
-            Character a = struct.decode(bit);
+            Character a = arbreDecodage.decode(bit);
             
             if(a!=null){
                 outS.append(a);
               //§10Stats.printCharIOD("Ecriture du caractere  : "+a);
             }
             
-            // lecture nouveaU
+            // Lecture nouveau
             bit = this.inS.readBit();
             
         }
@@ -62,5 +58,11 @@ public class Decompresseur {
         this.outS.close(); // fermeture du flux
         this.inS.close(); // fermeture du flux
     }
+    
+    public String getArbreDot(){
+		return arbreDecodage.toDot();
+	}
+	
+    
     
 }
