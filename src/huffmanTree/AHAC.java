@@ -54,23 +54,27 @@ public class AHAC extends AHA {
 		
 		String buff = Integer.toBinaryString((int) c);
 		//§DISStats.printCharIOC("Ecriture du caractère ascii : '" + c + "'");
-		int tmp = 0;
+//		int tmp = 0;
 		//Si le code ascii est plus petit que 8 on rajoute des bit 0 jusqu'a 8
 		//Sinon on supprime les bits en trop :'( 
-		if(buff.length()>8){
-			tmp = 8;
-		}else{
-			tmp = buff.length();
-		}
 		
-		for(int j = tmp ; j< 8; j++){ //HERE
+		//TODO HERE REFACTOR: utiliser plutot un break si 8
+		
+//		if(buff.length()>8){
+//			tmp = 8;
+//		}else{
+//			tmp = buff.length();
+//		}
+//		
+		int buflen =buff.length();
+		for(int j = buflen ; j< 8; j++){ //HERE
 			flux.writeBit(0);
 		}
 		
 		//int j =  (buff.length()> 8) ? buff.length() :8;
 				
 				
-		for (int i = 0; i<tmp; i++) { 
+		for (int i = 0; (i < buflen) && (i < 8) ; i++) { 
 			flux.writeBit(Character.getNumericValue(buff.charAt(i)));
 		}
 		//§DISStats.addTimeBinaryWrite(System.currentTimeMillis() - tstart);

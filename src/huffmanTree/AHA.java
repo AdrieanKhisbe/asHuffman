@@ -316,21 +316,6 @@ public class AHA {
 
 		StringBuffer sb = new StringBuffer();
 
-		// HERE TODO: format du noued interne, des feuilles
-		// Encodage des liens
-
-		/*
-		 * Refaire parcours en profondeur. While ici? appele string todot des
-		 * feuilles et nouds
-		 * 
-		 * Notes pour dot: voir notes.org dans rapport
-		 * 
-		 * Numéroter les noueds interne. (rajouter id noueds) Utiliser label
-		 * pour indiquer le poids Rajouter le code pour les feuilles, lettre,
-		 * 
-		 * Juste faire format texte.! (forme rectangle)
-		 */
-
 		// Prélude
 		sb.append("graph  myAHa { \n");
 

@@ -1,6 +1,5 @@
 package huffmanTree;
 
-import java.util.regex.Pattern;
 
 public class Feuille extends Arbre {
 	public char lettre;
@@ -9,8 +8,12 @@ public class Feuille extends Arbre {
 		this.code = code;
 		this.lettre = c;
 		this.poids = poids;
-		this.idName = Pattern.quote("" + c); // Hack HERE check
-		// TODO: adapter les caractères spéciaux!!!!!!
+		
+		
+		this.idName = (c == '"')? "\\\"" : String.valueOf(c); 
+		// ou Character.toString(char).  (mieux que hack ""+c)
+		// Id dot: n'importe quoi entre quotes, (avec quote échapée)
+		//TODO backslash n?
 	}
 
 	public String getCode() {
@@ -25,7 +28,7 @@ public class Feuille extends Arbre {
 				+ code;
 	}
 
-	private static final String dotTemplate = "%1$s [shape=record, label = \"<f0> %1$s | <f1>  %2$s  |<f2> %3$d\" ]";
+	private static final String dotTemplate = "     \"%1$s\" [shape=record, label = \"<f0> %1$s | <f1>  %2$s  |<f2> %3$d\" ] ;";
 
 	// lettre, code, poids
 	// TODO: color
