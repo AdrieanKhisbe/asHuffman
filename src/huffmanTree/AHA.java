@@ -343,4 +343,10 @@ public class AHA {
 		return sb.toString();
 	}
 
+	public String hashToCsv(){
+		///TODO
+		//todo: separator argument
+		return null;
+	}
+	
 }
