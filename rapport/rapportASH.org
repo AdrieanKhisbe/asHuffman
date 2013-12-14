@@ -3,12 +3,42 @@
 
 
 §TOdo: organisation
+§GET: bon sujet
 
 
+* Modifications de l'arbre'
 
-* Questions
+** Démonstration de Propriétés
+
+*** TODO Ordre croissant des Noueds
+
+*** TODO
+
+** TODO Non échange entre Noeud et Descendantt
+
+** TODO Nombre maximum d'échanges
 
 
+* Compression et décompression
 
+** Complexité Algorithme
 
-* Commentaire code
+** Encodage Abracadabra
+# §TODO: arbres différentes étapes. Code
+
+** Algorithme de décompression
+
+* Implantation
+
+** TODO Structures de données
+
+** TODO Résultats sur Jeux de test
+
+Réalisée lors de la soutenance le 10 décembre.
+
+La compression sur le fichier test10 de 90Mo a
+# todo: table results.
+
+* TODO Dispatch
+
+sur Sensibilité des performances aux entrées sorties.

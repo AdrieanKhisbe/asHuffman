@@ -4,6 +4,8 @@ import huffmanTree.AHAC;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,33 +13,51 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
 public class Compresseur {
-	private String inputFilename;
-	private String outPutFilename;
 	private BufferedOutputStream outS;
 	private BufferedReader inS;
 	private AHAC arbreEncodage = null;
 
-	public Compresseur(String nomI, String nomO) {
-		this.inputFilename = nomI;
-		this.outPutFilename = nomO;
+	/**
+	 * 
+	 * @param fileI
+	 * @param fileO
+	 * @throws IOException
+	 */
+	public Compresseur(File fileI, File fileO) throws IOException {
+
+		// ouverture du flux de lecture du fichier a compresser
+		this.inS = new BufferedReader(new InputStreamReader(
+				new FileInputStream(fileI), Charset.forName("UTF-8")
+						.newDecoder()));
+		
+		// ouverture du flux d'écriture du ficher compresser
+		this.outS = new BufferedOutputStream(new FileOutputStream(fileO));
 		this.arbreEncodage = new AHAC();
 	}
 
-	public Compresseur(String nomO) {
-		this("", nomO);
-		// WHY??
-	}
-
-	public void compression() throws IOException {
-		// ouverture du flux de lecture du fichier a compresser
+	public Compresseur(String chaine, File fileO) throws IOException {
+		// Création d'un flux à partir chaine caractère
 		this.inS = new BufferedReader(new InputStreamReader(
-				new FileInputStream(this.inputFilename), Charset.forName(
-						"UTF-8").newDecoder()));
+				new ByteArrayInputStream(chaine.getBytes("UTF-8"))));
 
 		// ouverture du flux d'écriture du ficher compresser
-		this.outS = new BufferedOutputStream(new FileOutputStream(
-				this.outPutFilename) // , 8192 * 64 DIS
-		); // HERE: buffer size
+		this.outS = new BufferedOutputStream(new FileOutputStream(fileO));
+		this.arbreEncodage = new AHAC();
+	}
+	
+	public Compresseur(String chaine) throws IOException {
+		this.inS = new BufferedReader(new InputStreamReader(
+				new ByteArrayInputStream(chaine.getBytes("UTF-8"))));
+
+		// ouverture du flux d'écriture du ficher compresser
+		this.outS = new BufferedOutputStream(System.out);
+		this.arbreEncodage = new AHAC();
+		
+	}
+	
+
+	public void compression() throws IOException {
+
 		BitOutputStream ecriture = new BitOutputStream(this.outS);
 
 		// Lecture caractère par caractère
@@ -53,11 +73,12 @@ public class Compresseur {
 		}
 
 		// encode caractère de fin. HACK
-		arbreEncodage.encode('\0', ecriture);
+	//	arbreEncodage.encode('\0', ecriture);
 
 		outS.flush();
 		this.outS.close(); // fermeture du flux
 		this.inS.close(); // fermeture du flux
+
 	}
 
 	public String getArbreDot() {
