@@ -6,7 +6,7 @@ public  class Arbre {
 	Arbre pere;
 	public int poids;
 	public String code;
-	public int posList;
+	public int posList;  // Arbre connait sa position dans la liste (gain de temps!)
 
 	// Mes a jour les code a partir du noeud
 	public void miseAJourCode() {
@@ -26,7 +26,6 @@ public  class Arbre {
 
 	}
 
-	// 10001111100
 
 	protected String idName;
 

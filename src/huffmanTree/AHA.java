@@ -14,12 +14,8 @@ public class AHA {
 	Arbre racineAha;
 	boolean first = true;
 	Map<Character, Feuille> index = new HashMap<>();
-	Arbre feuilleSpeciale = new Feuille('#', "", 0); // PK initialise feuille
-														// avec
-	// code!?
+	Arbre feuilleSpeciale = new Feuille('#', "", 0);
 	LinkedList<Arbre> ordreNoeuds = new LinkedList<>();
-
-	// ArrayList<Arbre> orderNoeudPoids; // RENAME
 
 	public AHA() {
 		racineAha = feuilleSpeciale;
@@ -61,9 +57,9 @@ public class AHA {
 		Feuille s = null;
 
 		/*
-		 * Si c est un nouveau on crée une nouvelle feuille , un nouveau noeud
-		 * qui a comme fils charSpecial et notre char et on l'ajoute a notre
-		 * structure
+		 * Si c est un nouveau caractère on crée une nouvelle feuille , un
+		 * nouveau noeud qui a comme fils charSpecial et notre char et on
+		 * l'ajoute a notre structure
 		 */
 		if (!this.charIsPresent(c)) {
 			// §DISStats.nbCharDiff++;
@@ -88,19 +84,18 @@ public class AHA {
 			ordreNoeuds.addLast(q);
 			ordreNoeuds.addLast(s);
 
-			// mise à jour spéciale
+			// mise à jour spéciale si l'arbre est constitué feuille spéciale
 			if (first) {
 				first = false;
 				racineAha = q;
-			}
-
-			else {
+			} else {
 				q.pere = p;
 				((NoeudInterne) p).filsGauche = q;
 			}
-			// this.majList();
+			this.majList(); // Pop Noeuds plutot que retirer?
+
 		}
-		// Sinon on prends un pointeur sur la feuille a inscrementer
+		// Sinon on prends un pointeur sur la feuille a incrementer
 		else {
 			// §DISStats.printDebug("Caractere déja présent !");
 
@@ -113,7 +108,7 @@ public class AHA {
 	}
 
 	private void traitement(Arbre q) {
-		Arbre p = q;
+		Arbre nouedCourant = q;
 		Arbre viole = null;
 		boolean swap = false;
 		// §DISStats.printDebug(">>> Index avant traitement \n" +
@@ -122,22 +117,20 @@ public class AHA {
 		/*
 		 * On remonte la liste des peres de q dans le but de les inscrémenter
 		 */
-		while (p.pere != null) {
-			p.poids++;
+		while (nouedCourant.pere != null) {
+			nouedCourant.poids++;
 			/*
 			 * Apres l'incrementation , on remonte dans l'odre GDBH pour
 			 * controler
 			 */
-			for (int i = p.posList - 1; i > 0; i--) {
+			for (int i = nouedCourant.posList - 1; i > 0; i--) {
 				// System.out.println("p est " +
 				// p.code+" et de poids : "+p.poids);
 
 				Arbre tmp = ((Arbre) ordreNoeuds.get(i));
 
-				// CHECK (sortie de la boucle plus tot)
-				// if(p.poids <= tmp.poids) break;
 				// Si la condition n'est plus respecté
-				if (p.poids > tmp.poids) {
+				if (nouedCourant.poids > tmp.poids) {
 
 					viole = tmp;
 					// §DISStats.printDebug("!> condition Violeeeee");
@@ -146,12 +139,12 @@ public class AHA {
 			}
 			/*
 			 * Si il y a plusieur viole , seul le viole avec le noeud le plus
-			 * haut dans l'ordre GDBC sera swaper
+			 * haut dans l'ordre GDBH sera swaper
 			 */
 			if (viole != null) {
 				// On ne doit pas swapper un noeud avec son pere
-				if (!p.pere.code.contentEquals(viole.code)) {
-					swap(p, viole);
+				if (!nouedCourant.pere.code.contentEquals(viole.code)) {
+					swap(nouedCourant, viole);
 					// §DISStats.printDebug("JE VIENS DE SWAP");
 					swap = true;
 					viole = null;
@@ -159,14 +152,14 @@ public class AHA {
 
 			}
 			// On passe au pere
-			p = p.pere;
+			nouedCourant = nouedCourant.pere;
 		}
 		// Ne met à jour la liste que si swap réalisé sinon non necessaire
 		if (swap) {
 			this.majList();
 		}
 		// ON inscrmente le poids du noeud racine
-		p.poids++;
+		nouedCourant.poids++;
 
 		// §DISStats.printDebug(">>> Traitement Index après traitement \n" +
 		// §DISStats this.indextoString());
@@ -343,14 +336,15 @@ public class AHA {
 		return sb.toString();
 	}
 
-	public String hashToCsv(){
+	public String hashToCsv() {
 		StringBuffer sb = new StringBuffer("Code courrant: \n");
-	
-		for (Feuille f : index.values()){
-			sb.append(f.lettre).append(":").append(f.code).append(":").append(f.poids).append("\n");
+
+		for (Feuille f : index.values()) {
+			sb.append(f.lettre).append(":").append(f.code).append(":")
+					.append(f.poids).append("\n");
 		}
-	
-	return sb.toString();
+
+		return sb.toString();
 	}
-	
+
 }

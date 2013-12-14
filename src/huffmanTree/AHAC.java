@@ -33,7 +33,7 @@ public class AHAC extends AHA {
 			//On ecrit le code ascii du nouveau caractere lu
 			this.ecrireCharFlux(c, ecriture);
 		}
-		//On modifit la strcuture 
+		//On modifie la structure 
 		this.modificationAHA(c);
 	}
 
