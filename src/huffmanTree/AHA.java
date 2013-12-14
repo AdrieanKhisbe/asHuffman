@@ -317,7 +317,7 @@ public class AHA {
 		StringBuffer sb = new StringBuffer();
 
 		// Prélude
-		sb.append("graph  myAHa { \n");
+		sb.append("digraph  myAHa { \n");
 
 		// Parcours Proffondeur
 		LinkedList<Arbre> fileNoeuds = new LinkedList<Arbre>();
@@ -344,9 +344,13 @@ public class AHA {
 	}
 
 	public String hashToCsv(){
-		///TODO
-		//todo: separator argument
-		return null;
+		StringBuffer sb = new StringBuffer("Code courrant: \n");
+	
+		for (Feuille f : index.values()){
+			sb.append(f.lettre).append(":").append(f.code).append(":").append(f.poids).append("\n");
+		}
+	
+	return sb.toString();
 	}
 	
 }

@@ -19,7 +19,7 @@ public class AHAC extends AHA {
 	}
 	
 	public void encode(char c, BitOutputStream ecriture) throws IOException {
-		// TODO. bonux  passer au dessus?
+		// BONUX: passer écritude au dessus: loin d'etre évident en pratique
 		
 		//Si le caractere est déja present
 		if (this.charIsPresent(c)) {
@@ -32,7 +32,6 @@ public class AHAC extends AHA {
 			this.ecrireBitSetFlux(buff, ecriture);
 			//On ecrit le code ascii du nouveau caractere lu
 			this.ecrireCharFlux(c, ecriture);
-
 		}
 		//On modifit la strcuture 
 		this.modificationAHA(c);

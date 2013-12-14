@@ -1,5 +1,6 @@
 package core;
 
+import huffmanTree.AHA;
 import huffmanTree.AHAC;
 
 import java.io.BufferedOutputStream;
@@ -11,6 +12,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+
+import tools.Dot;
+import tools.Stats;
 
 public class Compresseur {
 	private BufferedOutputStream outS;
@@ -29,7 +33,7 @@ public class Compresseur {
 		this.inS = new BufferedReader(new InputStreamReader(
 				new FileInputStream(fileI), Charset.forName("UTF-8")
 						.newDecoder()));
-		
+
 		// ouverture du flux d'écriture du ficher compresser
 		this.outS = new BufferedOutputStream(new FileOutputStream(fileO));
 		this.arbreEncodage = new AHAC();
@@ -44,7 +48,7 @@ public class Compresseur {
 		this.outS = new BufferedOutputStream(new FileOutputStream(fileO));
 		this.arbreEncodage = new AHAC();
 	}
-	
+
 	public Compresseur(String chaine) throws IOException {
 		this.inS = new BufferedReader(new InputStreamReader(
 				new ByteArrayInputStream(chaine.getBytes("UTF-8"))));
@@ -52,9 +56,8 @@ public class Compresseur {
 		// ouverture du flux d'écriture du ficher compresser
 		this.outS = new BufferedOutputStream(System.out);
 		this.arbreEncodage = new AHAC();
-		
+
 	}
-	
 
 	public void compression() throws IOException {
 
@@ -65,7 +68,7 @@ public class Compresseur {
 		while ((cha = this.inS.read()) != -1) {
 			// Pour chaque caractere on fait le traitement adéquoite
 
-			//§DISStats.printCharIOC(">> Lecture caractère : '" + (char) cha +
+			// §DISStats.printCharIOC(">> Lecture caractère : '" + (char) cha +
 			// "'")
 			arbreEncodage.encode((char) cha, ecriture);
 			// TODO: écrit ici!!
@@ -73,7 +76,7 @@ public class Compresseur {
 		}
 
 		// encode caractère de fin. HACK
-	//	arbreEncodage.encode('\0', ecriture);
+		// arbreEncodage.encode('\0', ecriture);
 
 		outS.flush();
 		this.outS.close(); // fermeture du flux
@@ -81,8 +84,43 @@ public class Compresseur {
 
 	}
 
-	public String getArbreDot() {
-		return arbreEncodage.toDot();
+	
+	/**
+	 * Version de Compress qui génère un arbre à chaque pas
+	 * @throws IOException
+	 */
+	public void compressionTest() throws IOException {
+
+		BitOutputStream ecriture = new BitOutputStream(this.outS);
+
+		// Lecture caractère par caractère
+		int cha, i=0;
+		while ((cha = this.inS.read()) != -1) {
+			
+			// Pour chaque caractere on fait le traitement adéquoite
+			Stats.printCharIOC(">> Lecture caractère : '" + (char) cha + "'");
+			arbreEncodage.encode((char) cha, ecriture);
+			
+			// HERE Crée nouvel arbre
+			// i
+			Dot.generateArbreGraph("aha-"+i, arbreEncodage);
+			i++;
+			
+
+		}
+
+
+		outS.flush();
+		this.outS.close(); // fermeture du flux
+		this.inS.close(); // fermeture du flux
+	}
+
+	public AHA getArbreEncodage() {
+		return arbreEncodage;
+	}
+	
+	public String getEncodageTable(){
+		return arbreEncodage.hashToCsv();
 	}
 
 }

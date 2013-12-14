@@ -2,8 +2,8 @@ package core;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import tools.Dot;
 import tools.Files;
 import tools.Stats;
 
@@ -99,27 +99,25 @@ public class asHuffman {
 		// Dot Regenation
 		// HERE: option!!
 		System.out.println("Arbre Encodage Dot: ");
-		System.out.println(c.getArbreDot());
-
+		System.out.println(c.getArbreEncodage().toDot());
+		// Dot.generateArbreGraph(c.getArbreEncodage());
 	}
+	
+	
 	private static void compressChaineMode(final String chaine, final String compressedFile)
 			throws IOException {
 
 		Stats.lanceChrono();
 		Compresseur c = new Compresseur(chaine, new File(
 				compressedFile));
-		c.compression();
+		c.compressionTest();
 
 		Stats.stopChrono();
 		Stats.printChrono("compression");
 
+		System.out.println(c.getEncodageTable());
 		// Dot Regenation
-		// HERE: option!!
-		PrintWriter dotwriter = new PrintWriter("ahac.dot", "UTF-8");
-		System.out.println("Arbre Encodage Dot dans fichier ahac.dot ");
-		dotwriter.println(c.getArbreDot());
-		dotwriter.close();
-		//TODO: try dot
+		Dot.generateArbreGraph(c.getArbreEncodage());
 
 	}
 		

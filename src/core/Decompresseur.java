@@ -4,6 +4,7 @@ import huffmanTree.AHAD;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -11,27 +12,25 @@ import java.io.PrintWriter;
 import java.nio.charset.Charset;
 
 public class Decompresseur {
-	private String nomFichierI = "";
-	private String nomFichierO = "";
 	private PrintWriter outS; // BufferedOutputStream outS;
 	private BitInputStream inS;
 	private AHAD arbreDecodage = null;
 
-	public Decompresseur(String nomI, String nomO) {
-		this.nomFichierI = nomI;
-		this.nomFichierO = nomO;
-		this.arbreDecodage = new AHAD();
-	}
-
-	public void decompression() throws IOException {
+	public Decompresseur(String nomI, String nomO) throws FileNotFoundException {
 		// ouverture du flux de lecture du fichier a decompresser
 		this.inS = new BitInputStream(new BufferedInputStream(
-				new FileInputStream(this.nomFichierI)));
+				new FileInputStream(nomI)));
 
 		// ouverture du flux d'écriture du ficher decompresser
 		this.outS = new PrintWriter(new OutputStreamWriter(
-				new FileOutputStream(this.nomFichierO), Charset
+				new FileOutputStream(nomO), Charset
 						.forName("UTF-8").newEncoder()));
+		this.arbreDecodage = new AHAD();
+	}
+
+	
+	
+	public void decompression() throws IOException {
 
 		// On parcourt tous les characteres du text a comrpesser
 		int bit = this.inS.readBit();
@@ -60,5 +59,8 @@ public class Decompresseur {
 	public String getArbreDot() {
 		return arbreDecodage.toDot();
 	}
-
+	
+	public String getEncodageTable(){
+		return arbreDecodage.hashToCsv();
+	}
 }
