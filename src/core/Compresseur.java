@@ -84,9 +84,9 @@ public class Compresseur {
 
 	}
 
-	
 	/**
 	 * Version de Compress qui génère un arbre à chaque pas
+	 * 
 	 * @throws IOException
 	 */
 	public void compressionTest() throws IOException {
@@ -94,19 +94,17 @@ public class Compresseur {
 		BitOutputStream ecriture = new BitOutputStream(this.outS);
 
 		// Lecture caractère par caractère
-		int cha, i=0;
+		int cha, i = 0;
+		Dot.generateArbreGraph("aha-" + (i++), arbreEncodage);
 		while ((cha = this.inS.read()) != -1) {
-			
+
 			// Pour chaque caractere on fait le traitement adéquoite
 			Stats.printCharIOC(">> Lecture caractère : '" + (char) cha + "'");
 			arbreEncodage.encode((char) cha, ecriture);
-			
-			Dot.generateArbreGraph("aha-"+i, arbreEncodage);
-			i++;
-			
 
+			Dot.generateArbreGraph("aha-" + (i++), arbreEncodage);
+		
 		}
-
 
 		outS.flush();
 		this.outS.close(); // fermeture du flux
@@ -116,8 +114,8 @@ public class Compresseur {
 	public AHA getArbreEncodage() {
 		return arbreEncodage;
 	}
-	
-	public String getEncodageTable(){
+
+	public String getEncodageTable() {
 		return arbreEncodage.hashToCsv();
 	}
 

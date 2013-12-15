@@ -8,15 +8,30 @@
 
 * Modifications de l'arbre'
 
-** Démonstration de Propriétés
-
+** COMMENT Démonstration de Propriétés
+Plus au programme...
 *** TODO Ordre croissant des Noueds
 
 *** TODO
 
-** TODO Non échange entre Noeud et Descendantt
+** Non échange entre Noeud et Descendant.
 
-** TODO Nombre maximum d'échanges
+L'algorithme va déclencher un échange entre deux noeuds quand leur poids violeront la propriété d'Arbre de Huffman Adaptatif, à savoir qu'un noeud dans l'ordre GDBH doit avoir un poids supérieur ou égal à tout poids le précédent dans l'ordre. Le test =incrémentable= vérifiant si cette propriété est maintenue en alourdissant une des feuilles.
+
+Hors il est tout simplement impossible qu'un ancêtre ai un poids inférieur à celui de ses descendants, puisque le poids d'un noeud est la somme du poids de ces deux fils (l'arbre étant complet). La seule situation où un père peut avoir le meme poids qu'un de ces fils, c'est quand l'autre fils est la feuille spéciale, au poids nul.
+
+
+** Nombre maximum d'échanges
+
+Le nombre maximum d'échange possible correspond à la hauteur de l'AHA moins 1.
+En effet après chaque échange, on appelle la procédure de traitement sur le père du noeud que l'on vient de swapper. Donc dans le pire des cas, (si l'échange se fait avec un noeud de meme profondeur) on fait un échange par niveau à l'exception du dernier. (la racine).
+
+La hauteur de l'arbre de huffman est dans le pire cas égale au nombre de caractère possible. Ceci arrive quand l'AHA est un peigne, par exemple quand la fréquence des lettre correspond à la suite $(2^i)_{i\in\mathbb{N}}$
+
+Par Exemple pour le mot =abbccccdddddddd=:
+[[file:img/abbccccdddddddd.png]]
+
+Par conséquent, dans le pire cas, le nombre maxium d'échange est $n-1$ (avec $n$ égal à la taille de l'alphabet des symboles)
 
 
 * Compression et décompression
@@ -25,6 +40,20 @@
 
 ** Encodage Abracadabra
 # §TODO: arbres différentes étapes. Code
+# [[file:img/aha-0.png]]
+[[file:img/aha-1.png]]
+[[file:img/aha-2.png]]
+[[file:img/aha-3.png]]
+[[file:img/aha-4.png]]
+[[file:img/aha-5.png]]
+[[file:img/aha-6.png]]
+[[file:img/aha-7.png]]
+[[file:img/aha-8.png]]
+[[file:img/aha-9.png]]
+[[file:img/aha-10.png]]
+[[file:img/aha-11.png]]
+
+
 
 ** Algorithme de décompression
 

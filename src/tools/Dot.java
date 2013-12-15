@@ -9,6 +9,7 @@ public class Dot {
 
 	private static boolean dotProgram = false;
 
+	// Establish whether dot is installed on the machine or not
 	static {
 		try {
 			Runtime rt = Runtime.getRuntime();
@@ -34,6 +35,7 @@ public class Dot {
 
 	}
 
+	
 	public static void generateArbreGraph(AHA arbre) throws IOException {
 		generateArbreGraph("aha", arbre);
 	}
