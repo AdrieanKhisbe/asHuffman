@@ -7,7 +7,32 @@ import java.io.PrintWriter;
 
 public class Dot {
 
-	// TODO Méthod pour générer automatiquement le dot si possible
+	private static boolean dotProgram = false;
+
+	static {
+		try {
+			Runtime rt = Runtime.getRuntime();
+			Process pr = rt.exec("which dot"); // Bonux: put up static
+
+			pr.waitFor();
+			dotProgram = (pr.exitValue() == 0);
+
+			if (!dotProgram) {
+				System.err
+						.println("Les graphes ne pourront être générés, dot(graphviz) n'étant pas installé sur cette machine");
+			}
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			throw new RuntimeException();
+		} catch (IOException e) {
+			// causé par erreur du processus (windows.
+			e.printStackTrace();
+			System.err
+					.println("Les graphes ne pourront être générés (not Unix OS)");
+		}
+
+	}
 
 	public static void generateArbreGraph(AHA arbre) throws IOException {
 		generateArbreGraph("aha", arbre);
@@ -16,38 +41,27 @@ public class Dot {
 	public static void generateArbreGraph(String filename, AHA arbre)
 			throws IOException {
 
-		System.out.println("Génération d'un fichier dot");
-		generateDotFile(filename + ".dot", arbre);
+		String dotname = filename + ".dot";
 
-		Runtime rt = Runtime.getRuntime();
-		Process pr = rt.exec("which dot"); // Bonux: put up static
-		
-		try {
-			pr.waitFor();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			throw new RuntimeException();
-		}
-		
+		System.out.println("Génération d'un fichier dot " + dotname);
+		generateDotFile(dotname, arbre);
+
 		// test si peut lancer Dot
-		if (pr.exitValue() == 0) {
+		if (dotProgram) {
 			System.out.print("Génération du Graphe au format Png... ");
-			pr = rt.exec("dot -o " + filename + ".png -Tpng " + filename
-					+ ".dot");
+			Process pr = Runtime.getRuntime().exec(
+					"dot -o " + filename + ".png -Tpng " + dotname);
 			try {
 				pr.waitFor();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				throw new RuntimeException();
 			}
-			
+
 			System.out.println("Done");
 
-		} else {
-			System.err.println("Le graphe ne peut etre générer, dot n'étant pas installé sur cette machine");
 		}
 
-		//
 	}
 
 	public static void generateDotFile(String filename, AHA arbre)

@@ -66,11 +66,10 @@ public class AHA {
 
 			// §DISStats.printDebug("Nouveau caractère : " + c);
 
-			q = feuilleSpeciale;
 			p = feuilleSpeciale.pere;
 			Arbre buff = feuilleSpeciale;
 
-			s = new Feuille(c, ((Feuille) q).getCode() + "1", 1);
+			s = new Feuille(c, ((Feuille) buff).getCode() + "1", 1);
 			index.put(c, s);
 			s.posList = ordreNoeuds.size() - 1;
 
@@ -81,9 +80,10 @@ public class AHA {
 
 			buff.pere = q;
 
+
 			ordreNoeuds.addLast(q);
 			ordreNoeuds.addLast(s);
-
+			
 			// mise à jour spéciale si l'arbre est constitué feuille spéciale
 			if (first) {
 				first = false;

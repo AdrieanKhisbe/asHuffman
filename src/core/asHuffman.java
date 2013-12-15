@@ -9,18 +9,22 @@ import tools.Stats;
 
 public class asHuffman {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 
-		final String USAGE = "Usage: (de)compression inputfile outputfile";
-		// Stéphane, uuun throws ici....
+		final String USAGE = "Usage:\n" + ""
+				+ "  c[ompression] fichier_à_compresser fichier_compressé \n"
+				+ "  d[ecompression] fichier_compressé fichier_decompressé\n"
+				+ "  t[est] fichier_à_compresser fichier_decompressé \n"
+				+ "  chaine chainacompresser fichier_compressé \n"
+				+ "  chainetest chainacompresser fichier_compressé \n";
 
 		try {
-			// TODO: desactiver après tests...
-			if (args.length == 0) {
-			 System.err.println(USAGE);
-				 System.exit(1);
 
-			} else  {
+			if (args.length == 0) {
+				System.err.println(USAGE);
+				System.exit(1);
+
+			} else {
 				// BONUX: argument checking!!
 
 				switch (args[0].toLowerCase()) {
@@ -44,27 +48,32 @@ public class asHuffman {
 					System.out.println("Lancement AsHuffman en mode test");
 					testMode(args[1], args[2]);
 					break;
-					
-				case "chaine": 
+
+				case "chaine":
 					System.out.println("Lancement AsHuffman en mode chaine");
-					compressChaineMode(args[1], args[2]);
+					compressChaineMode(args[1], args[2], false);
+					break;
+
+				case "chainetest":
+					System.out
+							.println("Lancement AsHuffman en mode chaine test (création arbre pour chaque noued)");
+					compressChaineMode(args[1], args[2], true);
 					break;
 
 				default:
 					System.err.println((args[0].equals(egmp)) ? eegg : USAGE);
 					System.exit(1);
 				}
-			
+
 			}
 		} catch (ArrayIndexOutOfBoundsException e) {
-			System.err
-			.println("Le nombre de paramètre est incorrect\n"
-					+" Arret du programme\n"+USAGE);
-	System.exit(1);
+			System.err.println("Le nombre de paramètre est incorrect\n"
+					+ " Arret du programme\n" + USAGE);
+			System.exit(1);
 		} catch (IOException e) {
-			System.err
-					.println("Le fichier d'input spécifié n'existe pas\n"
-							+" Arret du programme");
+			System.err.println("Le fichier d'input spécifié n'existe pas\n"
+					+ " Arret du programme");
+			// TODO: HERE IO pourrait venir d'ailleur
 			System.exit(1);
 		}
 
@@ -97,30 +106,29 @@ public class asHuffman {
 				+ (100 - (tauxCompression * 100)) + "%");
 
 		// Dot Regenation
-		// HERE: option!!
-		System.out.println("Arbre Encodage Dot: ");
-		System.out.println(c.getArbreEncodage().toDot());
-		// Dot.generateArbreGraph(c.getArbreEncodage());
+		// BONUX: option!!
+		Dot.generateArbreGraph(c.getArbreEncodage());
 	}
-	
-	
-	private static void compressChaineMode(final String chaine, final String compressedFile)
-			throws IOException {
+
+	private static void compressChaineMode(final String chaine,
+			final String compressedFile, boolean testMode) throws IOException {
 
 		Stats.lanceChrono();
-		Compresseur c = new Compresseur(chaine, new File(
-				compressedFile));
-		c.compressionTest();
+		Compresseur c = new Compresseur(chaine, new File(compressedFile));
+		if (testMode)
+			c.compressionTest();
+		else
+			c.compression();
 
 		Stats.stopChrono();
 		Stats.printChrono("compression");
-
-		System.out.println(c.getEncodageTable());
+		if (testMode)
+			System.out.println(c.getEncodageTable());
+		
 		// Dot Regenation
 		Dot.generateArbreGraph(c.getArbreEncodage());
 
 	}
-		
 
 	private static void decompressMode(String compressedFile, String outPutFile)
 			throws IOException {
@@ -139,8 +147,7 @@ public class asHuffman {
 		// §DISStats.printStats();
 
 		// Dot Regenation
-		System.out.println("Arbre Decodage Dot: ");
-		System.out.println(d.getArbreDot());
+		Dot.generateArbreGraph(d.getArbreDecodage());
 
 	}
 

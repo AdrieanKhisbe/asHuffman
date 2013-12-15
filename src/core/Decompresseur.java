@@ -1,5 +1,6 @@
 package core;
 
+import huffmanTree.AHA;
 import huffmanTree.AHAD;
 
 import java.io.BufferedInputStream;
@@ -56,8 +57,8 @@ public class Decompresseur {
 		this.inS.close(); // fermeture du flux
 	}
 
-	public String getArbreDot() {
-		return arbreDecodage.toDot();
+	public AHA getArbreDecodage() {
+		return arbreDecodage;
 	}
 	
 	public String getEncodageTable(){

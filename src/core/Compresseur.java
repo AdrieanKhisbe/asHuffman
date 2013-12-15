@@ -101,8 +101,6 @@ public class Compresseur {
 			Stats.printCharIOC(">> Lecture caractère : '" + (char) cha + "'");
 			arbreEncodage.encode((char) cha, ecriture);
 			
-			// HERE Crée nouvel arbre
-			// i
 			Dot.generateArbreGraph("aha-"+i, arbreEncodage);
 			i++;
 			
