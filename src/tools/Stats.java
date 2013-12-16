@@ -1,7 +1,8 @@
 package tools;
 
-
 /**
+ * Fonctions de calcul de statistiques. Actuelles juste utilisée pour timer
+ * opération. Les stats intérieures ne sont plus calculée
  * 
  * @author Steph
  */
@@ -22,6 +23,8 @@ public class Stats {
 	public static boolean printStats = true;
 	public static boolean printTemps = true;
 	public static boolean printDebug = false;
+
+	// Suite de getters, setteur sans intéret
 
 	public static void switchTprintStats() {
 		printStats = true;
@@ -63,10 +66,20 @@ public class Stats {
 		printDebug = false;
 	}
 
+	/**
+	 * Affiche stats après reset
+	 */
+	@Deprecated
 	public static void printStats() {
 		printStats(true);
 	}
 
+	/**
+	 * Affiche stats, et reset eventuellement
+	 * 
+	 * @param reset
+	 */
+	@Deprecated
 	public static void printStats(boolean reset) {
 		if (printStats) {
 			System.out.println("Nombre de caractere different : "
@@ -111,6 +124,10 @@ public class Stats {
 		}
 	}
 
+	/**
+	 * Affiché le temps passé à écrire
+	 */
+	@Deprecated
 	public static void printCompressionWriteStats() {
 		if (Stats.getChrono() != 0) {
 			float percentWrite = (Stats.timeBinaryWrite / 10)
@@ -122,6 +139,10 @@ public class Stats {
 		}
 	}
 
+	/**
+	 * Remettais à jour les stats
+	 */
+	@Deprecated
 	public static void resetStats() {
 		nbCharDiff = 0;
 		nbTotalChar = 0;
@@ -130,22 +151,38 @@ public class Stats {
 		timeSwap = 0;
 		timeList = 0;
 		timeBinaryWrite = 0;
-
 	}
 
+	/**
+	 * Lance le chrono
+	 */
 	public static void lanceChrono() {
 		tempsAvant = System.currentTimeMillis();
 	}
 
+	/**
+	 * Arrete le chrono
+	 */
 	public static void stopChrono() {
 		tempsApres = System.currentTimeMillis();
 	}
 
+	/**
+	 * Retourne le temps chronométré
+	 * 
+	 * @return temps en secondes
+	 */
 	public static float getChrono() {
 		return ((float) (tempsApres - tempsAvant)) / 1000l;
 		// TODO fix
 	}
 
+	/**
+	 * Affiche le chrono
+	 * 
+	 * @param s
+	 *            message préfixe
+	 */
 	public static void printChrono(String s) {
 		if (printTemps) {
 			System.out.println("Temps de " + s + " : " + Stats.getChrono()
@@ -153,27 +190,37 @@ public class Stats {
 		}
 	}
 
+	/**
+	 * Affiche message si mode IOC
+	 * @param s message
+	 */
 	public static void printCharIOC(String s) {
 		if (printIOC) {
 			System.out.println(s);
 		}
 	}
 
+	/**
+	 * Affiche message si mode IOD 
+	 * @param s message
+	 */
 	public static void printCharIOD(String s) {
 		if (printIOD) {
 			System.out.println(s);
 		}
 	}
-
+	/**
+	 * Affiche message si mode débug
+	 * @param s message
+	 */
 	public static void printDebug(String s) {
 		if (printDebug) {
 			System.out.println(s);
 		}
 	}
 
-	/**
-	 * function timing
-	 */
+	// fonction pour évaluée le nombre d'appel
+
 	public static void resetTimeSwap() {
 		timeSwap = 0;
 	}
@@ -197,7 +244,5 @@ public class Stats {
 	public static void addTimeBinaryWrite(long time) {
 		timeBinaryWrite += time;
 	}
-
-
 
 }

@@ -5,8 +5,19 @@ import huffmanTree.AHA;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * Méthodes statiques pour créer des représentations graphiques des arbres de
+ * compression
+ * 
+ * @author adriean
+ * 
+ */
 public class Dot {
 
+	/**
+	 * Booléen pour savoir si programme installé sur le système Déterminé au
+	 * chargement de la classe
+	 */
 	private static boolean dotProgram = false;
 
 	// Establish whether dot is installed on the machine or not
@@ -35,11 +46,12 @@ public class Dot {
 
 	}
 
-	
-	public static void generateArbreGraph(AHA arbre) throws IOException {
-		generateArbreGraph("aha", arbre);
-	}
-
+	/**
+	 * Génère le fichier dot, voire png représentant l'arbre
+	 * @param filename le nom (sand extension) pour nommer les fichiers
+	 * @param arbre arbre à mapper
+	 * @throws IOException
+	 */
 	public static void generateArbreGraph(String filename, AHA arbre)
 			throws IOException {
 
@@ -66,6 +78,26 @@ public class Dot {
 
 	}
 
+	/**
+	 * Génère arbre avec nom par défault
+	 * 
+	 * @param arbre
+	 *            arbre à "doter"
+	 * @throws IOException
+	 */
+	public static void generateArbreGraph(AHA arbre) throws IOException {
+		generateArbreGraph("aha", arbre);
+	}
+
+	/**
+	 * Génère le fichier dot associé à l'arbre
+	 * 
+	 * @param filename
+	 *            fichier ou enregistrer
+	 * @param arbre
+	 *            arbre à mapper
+	 * @throws IOException
+	 */
 	public static void generateDotFile(String filename, AHA arbre)
 			throws IOException {
 		PrintWriter pw = new PrintWriter(filename, "UTF-8");

@@ -3,12 +3,18 @@ package tools;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Tools méthodes.
+ * @author adriean
+ *
+ */
 public class Files {
+	
 	/**
-	 * ratio compression
+	 * Calcul ratio compression
 	 * 
-	 * @param fn1
-	 * @param fn2
+	 * @param fn1 fichier original
+	 * @param fn2 fichier compression
 	 * @return taille fichier 1 rapporté au fichier 2
 	 */
 	public static float compareFileSize(String fn1, String fn2) {
@@ -23,6 +29,11 @@ public class Files {
 
 	}
 	
+	/**
+	 * Teste existance fichier
+	 * @param filename nom du fichier
+	 * @throws IOException lancé si fichier n'existe pas
+	 */
 	public static void checkFileExists(String filename) throws IOException{
 		File f1 = new File(filename);
 		if(! f1.exists())  throw new IOException("File doesn't Exists");

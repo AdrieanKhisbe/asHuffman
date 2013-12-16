@@ -4,6 +4,7 @@ import huffmanTree.AHA;
 import huffmanTree.AHAD;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -18,6 +19,9 @@ public class Decompresseur {
 	private AHAD arbreDecodage = null;
 
 	public Decompresseur(String nomI, String nomO) throws FileNotFoundException {
+		this(new File(nomI), new File(nomO));
+	}
+	public Decompresseur(File nomI, File nomO) throws FileNotFoundException {
 		// ouverture du flux de lecture du fichier a decompresser
 		this.inS = new BitInputStream(new BufferedInputStream(
 				new FileInputStream(nomI)));
