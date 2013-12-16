@@ -39,6 +39,7 @@ public class asHuffman {
 
 			} else {
 				// BONUX: argument checking!!
+								
 
 				// Lance programme dans le mode spécifié par le premier argument
 				switch (args[0].toLowerCase()) {
@@ -104,6 +105,7 @@ public class asHuffman {
 		} catch (IOException e) {
 			System.err.println("Le fichier d'input spécifié n'existe pas\n"
 					+ " Arret du programme");
+			System.err.println(e.getMessage());
 			// TODO: HERE IOException pourrait venir d'ailleur: tout problème de
 			// fichier arrivant en cours de route
 			System.exit(1);

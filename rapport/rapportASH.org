@@ -1,5 +1,14 @@
 #+TITLE: Rapport Compression Huffman Dynamique
 #+AUTHOR: Adrien Becchis & Stéphane Ferreira
+#+LANGUAGE:  fr
+#+OPTIONS:   H:3 num:t toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+STARTUP: latexpreview
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper]
+#+LaTeX_HEADER: \usepackage[margin=0.75in]{geometry}
+#+LATEX_HEADER: \usepackage[utf8x]{inputenc}
+
 
 
 §TOdo: organisation
@@ -168,3 +177,17 @@ A noter que nos bons résultats sont plus liés à une bonne gestions des flux I
 * TODO Dispatch
 
 sur Sensibilité des performances aux entrées sorties.
+
+* Temps
+
+  Data/ExperimentalData:
+#+ATTR_LATEX:  :float :environment longtable
+#+include: benchs/exp.org
+
+Data/Test1/:
+#+ATTR_LATEX:  :float :environment longtable
+#+include: benchs/test1.org
+
+Data/Test2/:
+#+ATTR_LATEX:  :float :environment longtable
+#+include: benchs/test2.org
