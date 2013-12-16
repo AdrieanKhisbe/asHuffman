@@ -137,12 +137,21 @@ On suppose avoir  les procédures correspondantes:
   FinProcedure decompression
 #+END_SRC
 
-Note il suffit de remplacer 8 par la taille de l'encodage utilisé pour adapater l'algorithme à la version 5 bit, ou toute autre version de son choix
+Note il suffit de remplacer 8 par la taille de l'encodage utilisé pour adapter l'algorithme à la version 5 bit, ou toute autre version de son choix
 
 
 * Implantation
 
 ** TODO Structures de données
+
+*** COMMENT cp
+La structure est composée d’un arbre binaire classique + Liste doublement chainée
+pour l'ordre hiérarchique :
+C'est une structure d'arbre binaire classique, que l'on doit pouvoir parcourir selon
+l'ordre hiérarchique GDBH.
+Pour ce faire, on dote la structure d'une liste double chainée.
+Ainsi, chaque noeud connait : son père, ses fils, ses voisins dans l'ordre GDBH (grâce
+à  la liste chainée).
 
 ** TODO Résultats sur Jeux de test
 

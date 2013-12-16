@@ -59,6 +59,9 @@ public class asHuffman {
 							.println("Lancement AsHuffman en mode chaine test (création arbre pour chaque noued)");
 					compressChaineMode(args[1], args[2], true);
 					break;
+					
+				case "batchtest":
+					//TOBE IMPLEMENTED
 
 				default:
 					System.err.println((args[0].equals(egmp)) ? eegg : USAGE);
@@ -73,7 +76,7 @@ public class asHuffman {
 		} catch (IOException e) {
 			System.err.println("Le fichier d'input spécifié n'existe pas\n"
 					+ " Arret du programme");
-			// TODO: HERE IO pourrait venir d'ailleur
+			// TODO: HERE IOException pourrait venir d'ailleur: tout problème de fichier arrivant en cours de route
 			System.exit(1);
 		}
 
