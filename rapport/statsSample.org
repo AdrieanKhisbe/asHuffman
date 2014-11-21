@@ -1,0 +1,6 @@
+# Généré en invoquant le programme avec la commande benchmark sur les fichier textes à la racine du projet
+|filename|size (o)|tempsCompression (s)|tauxCompression (%)|tempsdecompression(s)|
+|NotesCours.org|1781|0.585|0.61482316|0.534|
+|README.md|211|0.034|0.80094784|0.033|
+|Ressources.md|786|0.054|0.6946565|0.107|
+|fichier_original.txt|18736|0.501|0.5527327|1.235|
