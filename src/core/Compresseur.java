@@ -16,6 +16,13 @@ import java.nio.charset.Charset;
 import tools.Dot;
 import tools.Stats;
 
+
+/**
+ * Classe capturant la logique de compression d'un fichier
+ * 
+ * @author Adriean
+ *
+ */
 public class Compresseur {
 	private BufferedOutputStream outS;
 	private BufferedReader inS;

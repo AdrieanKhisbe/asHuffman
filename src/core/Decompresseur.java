@@ -13,28 +13,54 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
 
+/**
+ * Classe capturant la logique de decompression d'un fichier
+ * 
+ * @author Adriean
+ *
+ */
 public class Decompresseur {
 	private PrintWriter outS; // BufferedOutputStream outS;
 	private BitInputStream inS;
 	private AHAD arbreDecodage = null;
 
+	/**
+	 * Crée un nouveau decompresseur à partir des noms de fichier
+	 * @param nomI nom du fichier d'entrée
+	 * @param nomO nom du fichier de sortie
+	 * 
+	 * @throws FileNotFoundException
+	 * TODO: reactor with Method factory.
+	 */
 	public Decompresseur(String nomI, String nomO) throws FileNotFoundException {
 		this(new File(nomI), new File(nomO));
 	}
-	public Decompresseur(File nomI, File nomO) throws FileNotFoundException {
+	
+	/**
+	 *  Crée un nouveau decompresseur à partir des fichier à utiliser comme entrée et sortie
+	 * @param fileI
+	 * @param fileO
+	 * @throws FileNotFoundException
+	 */
+	public Decompresseur(File fileI, File fileO) throws FileNotFoundException {
 		// ouverture du flux de lecture du fichier a decompresser
 		this.inS = new BitInputStream(new BufferedInputStream(
-				new FileInputStream(nomI)));
+				new FileInputStream(fileI)));
 
 		// ouverture du flux d'écriture du ficher decompresser
 		this.outS = new PrintWriter(new OutputStreamWriter(
-				new FileOutputStream(nomO), Charset
+				new FileOutputStream(fileO), Charset
 						.forName("UTF-8").newEncoder()));
 		this.arbreDecodage = new AHAD();
 	}
 
 	
-	
+	/**
+	 * Réalise la décompression dans son intégralité.
+	 * (va donc créer nouveau fichier dans lequel va encoder le résultat)
+	 * 
+	 * @throws IOException
+	 */
 	public void decompression() throws IOException {
 
 		// On parcourt tous les characteres du text a comrpesser

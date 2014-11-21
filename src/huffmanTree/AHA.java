@@ -299,7 +299,6 @@ public class AHA {
 		return sb.toString();
 	}
 
-	// TODO
 	/**
 	 * génère un arbre de l'arbre d'encodage
 	 * 

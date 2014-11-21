@@ -1,13 +1,17 @@
-
 package core;
-/**
- *
- * @author Steph
- */
-
 import java.io.*;
 
-
+/**
+ * 
+ * 
+ * Classe permettant l'écriture dans un flot bit à bit
+ * 
+ * récupérée depuis  http://www.developpez.net/forums/d25403/java/general-java/apis/io/ecriture-d-seul-bit-fichier/
+ * 
+ * 
+ * @author Forax the best of us
+ * @version 1.0
+ */
 public class BitOutputStream extends FilterOutputStream {
     int bits;
     int offset;
