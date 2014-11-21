@@ -23,7 +23,7 @@ public class asHuffman {
 	 */
 	public static void main(String[] args) {
 
-		final String USAGE = "Usage:\n" + ""
+		final String USAGE = "Utilitaire de [dé]compression suivant algorithme de Huffman dynamique\n\nUsage:\n" + ""
 				+ "  c[ompression] fichier_à_compresser fichier_compressé \n"
 				+ "  d[ecompression] fichier_compressé fichier_decompressé\n"
 				+ "  t[est] fichier_à_compresser fichier_decompressé \n"
