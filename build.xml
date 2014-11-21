@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="ash" basedir="." default="compile">
+	<property environment="env" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.7" />
+	<property name="source" value="1.7" />
+	<property name="jarname" value="ash.jar" />
+
+	<property name="src.dir" location="src" />
+	<property name="build.dir" location="bin" />
+	<property name="doc.dir" location="doc" />
+
+	<target name="init">
+		<copy includeemptydirs="false" todir=".">
+			<fileset dir=".">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="clean">
+		<delete verbose="true">
+			<fileset dir="${build.dir}" includes="**/*.class" />
+		</delete>
+	</target>
+
+	<target name="compile" depends="init" description="As target says">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<mkdir dir="${build.dir}" />
+		<javac verbose="true" debug="true" debuglevel="${debuglevel}" destdir="${build.dir}" includeantruntime="false" source="${source}" target="${target}">
+			<src path="." />
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile" description="Crée la jar de asHumann">
+		<jar basedir="." destfile="${jarname}">
+			<manifest>
+				<attribute name="Main-Class" value="core.asHuffman" />
+			</manifest>
+		</jar>
+	</target>
+
+
+	<!-- Generate javadocs for current project into ${doc.dir} -->
+	<target name="doc" depends="init" description="Générer documentation">
+		<mkdir dir="${doc.dir}" />
+		<javadoc sourcepath="${src.dir}" destdir="${doc.dir}" encoding="UTF-8" charset="UTF-8" />
+	</target>
+
+</project>

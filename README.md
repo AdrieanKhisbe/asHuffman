@@ -25,8 +25,7 @@ Le rapport associé au projet se trouve dans le dossier du meme nom. Les donnée
 `data.tgz`, et les stats on été générée à l'aide du programme avec la commande `benchmark`. (exemple fichier `statsSample.org`)
 
 **Update** Avec le recul et l'expérience, ce code mérite de nombreux refactors de diverses natures. (archi, dp, api files...)
-Un build serait ajoutée, la doc bien plus développée, certains commit renommés, des streams dédiés crées...
+Le code serait testé, la doc bien plus développée, certains commit renommés, des streams dédiés crées...
 Mais encore faudrait il qu'il y ai un vrai besoin pour cela :)
 
 <!-- TODO License... -->
-<!-- Add Pdf rapport... (liens fichier de bench?) -->
